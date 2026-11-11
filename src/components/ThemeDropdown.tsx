@@ -45,8 +45,8 @@ export const ThemeDropdown: React.FC<ThemeDropdownProps> = ({
 
       {/* Floating Dropdown Menu (pops up above the bottom navigation bar) */}
       {isOpen && (
-        <div className="absolute bottom-full right-0 mb-2 w-64 rounded-xl border border-theme-border bg-white dark:bg-slate-900 shadow-2xl p-1.5 z-50 animate-fadeIn text-theme-primary">
-          <div className="px-2.5 py-1.5 border-b border-theme-border/60 mb-1 flex items-center justify-between">
+        <div className="absolute bottom-full right-0 mb-2 w-72 max-h-[420px] flex flex-col rounded-xl border border-theme-border bg-white dark:bg-slate-900 shadow-2xl p-1.5 z-50 animate-fadeIn text-theme-primary">
+          <div className="px-2.5 py-1.5 border-b border-theme-border/60 mb-1 flex items-center justify-between flex-shrink-0">
             <span className="text-[10px] font-bold uppercase tracking-wider text-theme-accent">
               Choose Presentation Theme
             </span>
@@ -55,7 +55,7 @@ export const ThemeDropdown: React.FC<ThemeDropdownProps> = ({
             </span>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1 overflow-y-auto pr-0.5 flex-1 max-h-[350px]">
             {availableThemes.map((theme) => {
               const isSelected = theme.id === currentTheme.id;
 

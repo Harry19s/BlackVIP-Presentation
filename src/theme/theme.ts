@@ -17,6 +17,7 @@ export interface ThemeColors {
 export interface PresentationTheme {
   id: string;
   name: string;
+  isDark?: boolean;
   colors: ThemeColors;
   borderRadius: {
     sm: string;
@@ -41,6 +42,7 @@ export interface PresentationTheme {
 export const defaultTheme: PresentationTheme = {
   id: 'cool-clean',
   name: 'Tech & Innovation (Cool & Clean)',
+  isDark: false,
   colors: {
     bg: '#FFFFFF',
     card: '#F0F4F8',

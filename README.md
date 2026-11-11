@@ -10,7 +10,15 @@ An interactive, responsive, animated research presentation website built with **
 
 - **Exactly 19 Modular Slides**: Every slide covers a dedicated topic from the CVPR 2023 paper, implemented as an independent component.
 - **Direction-Aware Transitions**: Smooth slide entries and exits aware of navigation direction (next vs previous).
-- **Centralized Design System**: Centrally defined themes (`Cool & Clean` and `Dark Academic`) exposed via CSS variables; no hardcoded colors in slide components.
+- **Centralized Design System**: Centrally defined themes exposed via CSS variables; includes 8 curated themes selectable via a theme dropdown menu or keyboard shortcut:
+  1. `Cool & Clean`: Default technical light theme.
+  2. `Cyber Obsidian & Electric Sky`: Deep cyber-space dark theme.
+  3. `Cyber Daylight`: Crisp high-contrast light counterpart to Cyber Obsidian.
+  4. `Prism Spectrum`: Vibrant, colorful light theme with electric violet, magenta, and cyan.
+  5. `Synthwave Neon`: Ultra-vibrant cyberpunk dark theme with glowing neon rose and cyan.
+  6. `Nordic Sage`: Soothing botanical Scandinavian light theme with sage and pine.
+  7. `Dark Academic`: Refined slate-blue dark theme.
+  8. `Warm Editorial Paper`: Classic warm paper editorial light theme.
 - **Rendered Equations (KaTeX)**: Beautiful LaTeX equations for SPSA perturbation, component-wise gradient estimators, and SPSA-GC look-ahead momentum.
 - **Interactive Technical Diagrams**: Clean SVG/HTML pipelines illustrating the Coordinator autoencoder, trigger vector fusion, and optimization feedback.
 - **Comprehensive Speaker Notes**: Dedicated script drawer (press `N`) with spoken explanations, timer, diagram walkthroughs, and next-slide transitions.
@@ -29,7 +37,7 @@ An interactive, responsive, animated research presentation website built with **
 | `Esc` | Toggle Slide Overview Grid |
 | `N` | Toggle Speaker Notes & Script Drawer |
 | `R` | Replay Current Slide Animations |
-| `T` | Toggle Color Theme (Cool & Clean / Dark Academic) |
+| `T` | Cycle through all 8 Themes (or choose from dropdown) |
 | `F` | Toggle Fullscreen Presentation Mode |
 
 ---

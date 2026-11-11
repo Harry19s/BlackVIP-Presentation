@@ -1,9 +1,17 @@
 import { PresentationTheme, defaultTheme } from './theme';
-import { theme2, themeModernPaper } from './theme2';
+import {
+  theme2,
+  themeModernPaper,
+  themeCyberDaylight,
+  themePrismVibrant,
+  themeSynthwaveNeon,
+  themeNordicSage,
+} from './theme2';
 
 export const darkAcademicTheme: PresentationTheme = {
   id: 'dark-academic',
   name: 'Dark Academic',
+  isDark: true,
   colors: {
     bg: '#0F172A',
     card: '#1E293B',
@@ -24,9 +32,24 @@ export const darkAcademicTheme: PresentationTheme = {
   animation: { ...defaultTheme.animation },
 };
 
+/**
+ * All 8 curated themes for the BlackVIP presentation:
+ * - Cool & Clean (Default light)
+ * - Cyber Obsidian & Electric Sky (Default dark)
+ * - Cyber Daylight (1. Light theme similar to Cyber Obsidian)
+ * - Prism Spectrum (2. Light theme more colorful)
+ * - Synthwave Neon (3. Dark theme more colorful)
+ * - Nordic Sage (4. Light theme of your choice - Botanical minimal)
+ * - Dark Academic (Refined slate dark)
+ * - Warm Editorial Paper (Classic editorial light)
+ */
 export const availableThemes: PresentationTheme[] = [
   defaultTheme,
   theme2,
+  themeCyberDaylight,
+  themePrismVibrant,
+  themeSynthwaveNeon,
+  themeNordicSage,
   darkAcademicTheme,
   themeModernPaper,
 ];
@@ -47,7 +70,7 @@ export function applyThemeToCSS(theme: PresentationTheme): void {
   root.style.setProperty('--color-highlight', theme.colors.highlight);
   root.style.setProperty('--color-dark-panel', theme.colors.darkPanel);
 
-  if (theme.id === 'cyber-obsidian' || theme.id === 'dark-academic') {
+  if (theme.isDark) {
     root.classList.add('dark');
   } else {
     root.classList.remove('dark');
