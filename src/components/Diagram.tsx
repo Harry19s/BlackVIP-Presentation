@@ -1,14 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Equation } from './Equation';
 
 export interface DiagramNodeProps {
-  label: string;
-  sublabel?: string;
+  label: React.ReactNode;
+  sublabel?: React.ReactNode;
   type?: 'frozen' | 'trainable' | 'input' | 'output' | 'loss' | 'neutral';
   icon?: React.ReactNode;
   isActive?: boolean;
   className?: string;
 }
+
+// Helper to automatically render LaTeX math if present in strings
+const renderMathOrText = (content: React.ReactNode) => {
+  if (typeof content !== 'string') return content;
+  if (content.includes('\\') || content.includes('_{') || content.includes('^{')) {
+    return <Equation math={content} block={false} className="font-semibold" />;
+  }
+  return content;
+};
 
 export const DiagramNode: React.FC<DiagramNodeProps> = ({
   label,
@@ -19,12 +29,12 @@ export const DiagramNode: React.FC<DiagramNodeProps> = ({
   className = '',
 }) => {
   const typeStyles = {
-    frozen: 'bg-slate-200/80 dark:bg-slate-800 border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300',
-    trainable: 'bg-blue-50 dark:bg-blue-950/60 border-blue-400 dark:border-blue-500 text-blue-700 dark:text-blue-300 shadow-sm ring-1 ring-blue-500/20',
-    input: 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200',
-    output: 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-400 dark:border-emerald-600 text-emerald-700 dark:text-emerald-300',
-    loss: 'bg-cyan-50 dark:bg-cyan-950/60 border-cyan-400 dark:border-cyan-600 text-cyan-800 dark:text-cyan-300',
-    neutral: 'bg-theme-card border-theme-border text-theme-primary',
+    frozen: 'bg-slate-200/90 dark:bg-slate-800/90 border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 shadow-sm',
+    trainable: 'bg-blue-50/90 dark:bg-blue-950/70 border-blue-400 dark:border-blue-500 text-blue-800 dark:text-blue-200 shadow-md ring-1 ring-blue-500/30',
+    input: 'bg-gray-100 dark:bg-gray-800/90 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 shadow-sm',
+    output: 'bg-emerald-50 dark:bg-emerald-950/60 border-emerald-400 dark:border-emerald-600 text-emerald-800 dark:text-emerald-200 shadow-sm',
+    loss: 'bg-cyan-50 dark:bg-cyan-950/70 border-cyan-400 dark:border-cyan-600 text-cyan-900 dark:text-cyan-200 shadow-sm',
+    neutral: 'bg-theme-card border-theme-border text-theme-primary shadow-sm',
   };
 
   const badgeLabels = {
@@ -39,7 +49,7 @@ export const DiagramNode: React.FC<DiagramNodeProps> = ({
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className={`relative flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all ${
+      className={`relative flex flex-col items-center justify-center p-3 sm:p-3.5 rounded-xl border text-center transition-all ${
         typeStyles[type]
       } ${isActive ? 'ring-2 ring-theme-accent shadow-md' : ''} ${className}`}
     >
@@ -57,10 +67,10 @@ export const DiagramNode: React.FC<DiagramNodeProps> = ({
         </span>
       )}
       {icon && <div className="mb-1.5 opacity-90">{icon}</div>}
-      <span className="text-xs font-bold leading-tight">{label}</span>
+      <span className="text-xs font-bold leading-tight">{renderMathOrText(label)}</span>
       {sublabel && (
-        <span className="text-[11px] opacity-75 mt-0.5 font-medium leading-tight">
-          {sublabel}
+        <span className="text-[11px] opacity-80 mt-0.5 font-medium leading-tight">
+          {renderMathOrText(sublabel)}
         </span>
       )}
     </motion.div>
@@ -68,51 +78,108 @@ export const DiagramNode: React.FC<DiagramNodeProps> = ({
 };
 
 export const ArrowConnector: React.FC<{
-  label?: string;
+  label?: React.ReactNode;
   orientation?: 'horizontal' | 'vertical';
   variant?: 'solid' | 'dashed' | 'feedback';
+  length?: 'short' | 'medium' | 'long';
   className?: string;
-}> = ({ label, orientation = 'horizontal', variant = 'solid', className = '' }) => {
+}> = ({
+  label,
+  orientation = 'horizontal',
+  variant = 'solid',
+  length = 'medium',
+  className = '',
+}) => {
   const isHorizontal = orientation === 'horizontal';
 
+  // Significantly extended widths for clear horizontal arrow visibility
+  const widthClass = {
+    short: 'w-14 sm:w-16',
+    medium: 'w-20 sm:w-28',
+    long: 'w-28 sm:w-36',
+  }[length];
+
+  const heightClass = {
+    short: 'h-10',
+    medium: 'h-14',
+    long: 'h-20',
+  }[length];
+
+  if (isHorizontal) {
+    return (
+      <div className={`flex flex-col items-center justify-center px-1 select-none flex-shrink-0 ${className}`}>
+        {label && (
+          <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs mb-1 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
+            {renderMathOrText(label)}
+          </span>
+        )}
+        <div className={`relative flex items-center justify-center ${widthClass} h-6`}>
+          <svg className="w-full h-6 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
+            <defs>
+              <marker
+                id="arrowhead-flow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--color-accent, #2563EB)" />
+              </marker>
+            </defs>
+            {/* Extended Arrow Line Shaft */}
+            <line
+              x1="2"
+              y1="12"
+              x2="90"
+              y2="12"
+              stroke="var(--color-accent, #2563EB)"
+              strokeWidth="2.5"
+              strokeDasharray={variant === 'dashed' ? '5,4' : undefined}
+              className={variant === 'feedback' ? 'animate-pulse' : ''}
+              markerEnd="url(#arrowhead-flow)"
+            />
+          </svg>
+        </div>
+      </div>
+    );
+  }
+
+  // Vertical orientation
   return (
-    <div
-      className={`flex items-center justify-center relative select-none ${
-        isHorizontal ? 'flex-col px-2' : 'flex-row py-2'
-      } ${className}`}
-    >
+    <div className={`flex flex-row items-center justify-center py-1 select-none flex-shrink-0 ${className}`}>
+      <div className={`relative flex flex-col items-center justify-center ${heightClass} w-6`}>
+        <svg className="w-6 h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 24 100">
+          <defs>
+            <marker
+              id="arrowhead-flow-v"
+              markerWidth="8"
+              markerHeight="8"
+              refX="4"
+              refY="6"
+              orient="auto"
+            >
+              <path d="M 0 0 L 8 0 L 4 8 z" fill="var(--color-accent, #2563EB)" />
+            </marker>
+          </defs>
+          <line
+            x1="12"
+            y1="2"
+            x2="12"
+            y2="90"
+            stroke="var(--color-accent, #2563EB)"
+            strokeWidth="2.5"
+            strokeDasharray={variant === 'dashed' ? '5,4' : undefined}
+            className={variant === 'feedback' ? 'animate-pulse' : ''}
+            markerEnd="url(#arrowhead-flow-v)"
+          />
+        </svg>
+      </div>
       {label && (
-        <span
-          className={`text-[10px] font-semibold text-theme-accent bg-theme-highlight/80 px-1.5 py-0.5 rounded shadow-xs mb-0.5 z-10 whitespace-nowrap`}
-        >
-          {label}
+        <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs ml-1 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
+          {renderMathOrText(label)}
         </span>
       )}
-      <div
-        className={`flex items-center justify-center ${
-          isHorizontal ? 'w-10 h-4' : 'w-4 h-10 flex-col'
-        }`}
-      >
-        <div
-          className={`${
-            isHorizontal ? 'h-0.5 w-full' : 'w-0.5 h-full'
-          } ${
-            variant === 'dashed'
-              ? 'border-t-2 border-dashed border-theme-accent'
-              : variant === 'feedback'
-              ? 'bg-blue-600 animate-pulse'
-              : 'bg-theme-muted/50'
-          }`}
-        />
-        <div
-          className={`${
-            isHorizontal
-              ? 'border-l-4 border-l-theme-accent border-y-4 border-y-transparent ml-[-2px]'
-              : 'border-t-4 border-t-theme-accent border-x-4 border-x-transparent mt-[-2px]'
-          }`}
-        />
-      </div>
     </div>
   );
 };
-

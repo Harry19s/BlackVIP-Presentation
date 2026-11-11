@@ -16,9 +16,9 @@ export const SlideContainer: React.FC<SlideContainerProps> = ({
   children,
 }) => {
   return (
-    <div className="relative flex-1 w-full h-[calc(100vh-3.75rem)] overflow-hidden flex items-center justify-center p-4 sm:p-6 md:p-8 bg-slate-900/10">
-      {/* 16:9 Aspect Presentation Frame */}
-      <div className="w-full max-w-7xl h-full max-h-[880px] bg-theme-bg rounded-2xl border border-theme-border shadow-2xl relative overflow-hidden flex flex-col">
+    <div className="relative flex-1 w-full h-full overflow-hidden flex items-center justify-center p-2 sm:p-3 md:p-4 bg-theme-bg">
+      {/* Dynamic Presentation Canvas adapting to full window */}
+      <div className="w-full h-full bg-theme-bg rounded-xl border border-theme-border/60 shadow-xl relative overflow-hidden flex flex-col">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={`${currentSlide}-${animationKey}`}
@@ -27,7 +27,7 @@ export const SlideContainer: React.FC<SlideContainerProps> = ({
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between overflow-y-auto"
+            className="w-full h-full p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between overflow-y-auto"
           >
             {children}
           </motion.div>
@@ -36,4 +36,3 @@ export const SlideContainer: React.FC<SlideContainerProps> = ({
     </div>
   );
 };
-

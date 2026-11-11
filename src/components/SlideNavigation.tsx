@@ -7,10 +7,11 @@ import {
   RotateCcw,
   Maximize,
   Minimize,
-  SunMoon,
 } from 'lucide-react';
 import { SlideCounter } from './SlideCounter';
+import { ThemeDropdown } from './ThemeDropdown';
 import { slidesMeta } from '../data/slides';
+import { PresentationTheme } from '../theme/theme';
 
 interface SlideNavigationProps {
   currentSlide: number;
@@ -22,7 +23,8 @@ interface SlideNavigationProps {
   onReplay: () => void;
   isFullscreen: boolean;
   onToggleFullscreen: () => void;
-  onToggleTheme: () => void;
+  currentTheme: PresentationTheme;
+  onSelectTheme: (theme: PresentationTheme) => void;
   isNotesOpen: boolean;
 }
 
@@ -36,15 +38,16 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
   onReplay,
   isFullscreen,
   onToggleFullscreen,
-  onToggleTheme,
+  currentTheme,
+  onSelectTheme,
   isNotesOpen,
 }) => {
   const currentMeta = slidesMeta.find((s) => s.id === currentSlide);
 
   return (
-    <footer className="h-14 border-t border-theme-border bg-theme-bg/95 backdrop-blur-md px-6 flex items-center justify-between z-30 select-none">
+    <footer className="h-14 border-t border-theme-border bg-theme-bg/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between z-30 select-none">
       {/* Left info: Section and Title snippet */}
-      <div className="flex items-center gap-3 max-w-[35%] overflow-hidden">
+      <div className="flex items-center gap-3 max-w-[32%] overflow-hidden">
         <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-theme-card border border-theme-border text-theme-muted hidden sm:inline-block">
           {currentMeta?.section}
         </span>
@@ -58,7 +61,7 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
         <button
           onClick={onPrev}
           disabled={currentSlide <= 1}
-          className="p-1.5 rounded-lg border border-theme-border bg-theme-card text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-all"
+          className="p-1.5 rounded-lg border border-theme-border bg-theme-card text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-all shadow-xs"
           title="Previous slide (Left Arrow)"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -69,14 +72,14 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
         <button
           onClick={onNext}
           disabled={currentSlide >= totalSlides}
-          className="p-1.5 rounded-lg border border-theme-border bg-theme-card text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-all"
+          className="p-1.5 rounded-lg border border-theme-border bg-theme-card text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-all shadow-xs"
           title="Next slide (Right Arrow / Space)"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Right: Auxiliary tools */}
+      {/* Right: Auxiliary tools & Theme Dropdown */}
       <div className="flex items-center gap-2">
         <button
           onClick={onReplay}
@@ -109,13 +112,11 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
           <span className="hidden sm:inline text-[11px] font-mono">Notes</span>
         </button>
 
-        <button
-          onClick={onToggleTheme}
-          className="p-2 rounded-lg text-theme-muted hover:text-theme-primary hover:bg-theme-card border border-transparent hover:border-theme-border transition-colors"
-          title="Toggle Theme (T)"
-        >
-          <SunMoon className="w-4 h-4" />
-        </button>
+        {/* Theme Dropdown */}
+        <ThemeDropdown
+          currentTheme={currentTheme}
+          onSelectTheme={onSelectTheme}
+        />
 
         <button
           onClick={onToggleFullscreen}
@@ -128,4 +129,3 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
     </footer>
   );
 };
-

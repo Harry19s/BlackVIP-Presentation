@@ -47,8 +47,38 @@ body {
   background: rgba(148, 163, 184, 0.7);
 }
 
-/* KaTeX custom sizing inside slides */
+/* KaTeX custom sizing inside slides and visibility in all themes */
 .katex-display {
   margin: 0.5em 0 !important;
 }
+
+.katex {
+  color: inherit !important;
+  font-size: 1.05em !important;
+  text-rendering: geometricPrecision;
+}
+
+.katex * {
+  color: inherit !important;
+}
+
+.katex .mord,
+.katex .mbin,
+.katex .mrel,
+.katex .mop,
+.katex .mpunct,
+.katex .minner,
+.katex .mopen,
+.katex .mclose {
+  color: inherit !important;
+}
+
+.katex .frac-line {
+  border-bottom-color: currentColor !important;
+}
+
+.katex .sqrt-line {
+  border-top-color: currentColor !important;
+}
+
 

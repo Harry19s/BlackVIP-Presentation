@@ -1,4 +1,5 @@
 import { PresentationTheme, defaultTheme } from './theme';
+import { theme2, themeModernPaper } from './theme2';
 
 export const darkAcademicTheme: PresentationTheme = {
   id: 'dark-academic',
@@ -25,7 +26,9 @@ export const darkAcademicTheme: PresentationTheme = {
 
 export const availableThemes: PresentationTheme[] = [
   defaultTheme,
+  theme2,
   darkAcademicTheme,
+  themeModernPaper,
 ];
 
 export function applyThemeToCSS(theme: PresentationTheme): void {
@@ -43,5 +46,10 @@ export function applyThemeToCSS(theme: PresentationTheme): void {
   root.style.setProperty('--color-success', theme.colors.success);
   root.style.setProperty('--color-highlight', theme.colors.highlight);
   root.style.setProperty('--color-dark-panel', theme.colors.darkPanel);
-}
 
+  if (theme.id === 'cyber-obsidian' || theme.id === 'dark-academic') {
+    root.classList.add('dark');
+  } else {
+    root.classList.remove('dark');
+  }
+}

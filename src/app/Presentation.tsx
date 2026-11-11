@@ -7,7 +7,7 @@ import { SlideNavigation } from '../components/SlideNavigation';
 import { SlideOverview } from '../components/SlideOverview';
 import { SpeakerNotes } from '../components/SpeakerNotes';
 import { defaultTheme, PresentationTheme } from '../theme/theme';
-import { darkAcademicTheme, applyThemeToCSS } from '../theme/themes';
+import { availableThemes, applyThemeToCSS } from '../theme/themes';
 
 // Import all 19 slides
 import { Slide01Title } from '../slides/Slide01Title';
@@ -61,9 +61,11 @@ export const Presentation: React.FC = () => {
   }, [currentTheme]);
 
   const toggleTheme = useCallback(() => {
-    setCurrentTheme((prev) =>
-      prev.id === 'cool-clean' ? darkAcademicTheme : defaultTheme
-    );
+    setCurrentTheme((prev) => {
+      const currentIndex = availableThemes.findIndex((t) => t.id === prev.id);
+      const nextIndex = (currentIndex + 1) % availableThemes.length;
+      return availableThemes[nextIndex];
+    });
   }, []);
 
   const toggleFullscreen = useCallback(() => {
@@ -149,7 +151,7 @@ export const Presentation: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-slate-900 text-theme-primary overflow-hidden relative font-sans">
+    <div className="w-screen h-screen flex flex-col bg-theme-bg text-theme-primary overflow-hidden relative font-sans">
       {/* Top Slide Progress Bar */}
       <ProgressBar current={currentSlide} total={totalSlides} />
 
@@ -173,7 +175,8 @@ export const Presentation: React.FC = () => {
         onReplay={replayAnimation}
         isFullscreen={isFullscreen}
         onToggleFullscreen={toggleFullscreen}
-        onToggleTheme={toggleTheme}
+        currentTheme={currentTheme}
+        onSelectTheme={setCurrentTheme}
         isNotesOpen={isNotesOpen}
       />
 
@@ -194,4 +197,3 @@ export const Presentation: React.FC = () => {
     </div>
   );
 };
-

@@ -6,8 +6,8 @@ interface ComparisonCardProps {
   badge?: string;
   badgeVariant?: 'accent' | 'secondary' | 'neutral' | 'success';
   icon?: LucideIcon;
-  points: string[];
-  footerNote?: string;
+  points: (string | React.ReactNode)[];
+  footerNote?: React.ReactNode;
   isFocal?: boolean;
   className?: string;
 }
@@ -67,7 +67,7 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
             <span className={`inline-block w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${
               isFocal ? 'bg-theme-accent' : 'bg-theme-muted'
             }`} />
-            <span>{pt}</span>
+            <div className="flex-1">{pt}</div>
           </li>
         ))}
       </ul>
@@ -80,4 +80,3 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
     </div>
   );
 };
-
