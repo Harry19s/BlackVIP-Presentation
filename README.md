@@ -135,6 +135,23 @@ npm run build
 npm run preview
 ```
 
+### 5. Deploy to GitHub Pages
+
+#### Option A: Automatic Deployment via GitHub Actions (Recommended)
+This repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically builds and deploys the presentation whenever code is pushed to `main`.
+
+1. Go to your GitHub repository: [https://github.com/Harry19s/BlackVIP-Presentation](https://github.com/Harry19s/BlackVIP-Presentation)
+2. Click **Settings** → **Pages** (under Code and automation).
+3. Under **Build and deployment** → **Source**, select **GitHub Actions**.
+4. Push to `main` — GitHub Actions will automatically deploy your live site to:
+   **`https://harry19s.github.io/BlackVIP-Presentation/`**
+
+#### Option B: Manual CLI Deployment
+You can also build and deploy directly to the `gh-pages` branch from your terminal:
+```bash
+npm run deploy
+```
+
 ---
 
 ## 📄 Presentation Contents Breakdown
