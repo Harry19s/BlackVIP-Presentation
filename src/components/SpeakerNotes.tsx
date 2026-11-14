@@ -77,7 +77,7 @@ export const SpeakerNotes: React.FC<SpeakerNotesProps> = ({
             className={`px-2 py-0.5 rounded text-[11px] font-semibold flex items-center gap-1 ${
               isTimerRunning
                 ? 'bg-amber-500 text-white'
-                : 'bg-theme-accent text-white hover:bg-blue-600'
+                : 'bg-theme-accent text-white dark:text-slate-950 hover:bg-blue-600'
             }`}
           >
             <Play className="w-2.5 h-2.5" /> {isTimerRunning ? 'Pause' : 'Start Timer'}

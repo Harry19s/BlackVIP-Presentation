@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,6 +12,7 @@ export default {
           bg: 'var(--color-bg)',
           card: 'var(--color-card)',
           'card-hover': 'var(--color-card-hover)',
+          cardHover: 'var(--color-card-hover)',
           primary: 'var(--color-primary-text)',
           secondary: 'var(--color-secondary-text)',
           muted: 'var(--color-muted-text)',

@@ -144,11 +144,11 @@ export const Slide09SPSAConcept: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           Because all entries of <Equation math="\Delta_i" block={false} /> are perturbed simultaneously, SPSA probes the global gradient direction in expectation, achieving an unbiased estimator of <Equation math="\nabla \mathcal{L}(\phi_i)" block={false} />.
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           Spall (1992) Proof
         </span>
       </motion.div>

@@ -43,7 +43,7 @@ export const ComparisonCard: React.FC<ComparisonCardProps> = ({
             <div
               className={`p-2 rounded-lg ${
                 isFocal
-                  ? 'bg-theme-accent text-white'
+                  ? 'bg-theme-accent text-white dark:text-slate-950'
                   : 'bg-theme-border/50 text-theme-secondary'
               }`}
             >

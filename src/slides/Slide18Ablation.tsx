@@ -4,7 +4,7 @@ import { SectionLabel } from '../components/SectionLabel';
 import { ImagePlaceholder } from '../components/ImagePlaceholder';
 import { paperFigures } from '../data/paperFigures';
 import { staggerContainer, fadeUp, scaleIn } from '../utils/animations';
-import { SlidersHorizontal, CheckCircle2, Layers, Award } from 'lucide-react';
+import { SlidersHorizontal, CheckCircle2, Cpu } from 'lucide-react';
 
 export const Slide18Ablation: React.FC = () => {
   return (
@@ -17,16 +17,15 @@ export const Slide18Ablation: React.FC = () => {
       <div>
         <SectionLabel part="Part 5" section="Ablation Analysis" />
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-extrabold text-theme-primary">
-          Ablation Study: Dissecting BlackVIP Components
+          Ablation Study: Backbones &amp; Coordinator Design
         </motion.h2>
-        <motion.p variants={fadeUp} className="text-xs sm:text-sm text-theme-secondary mt-1 max-w-4xl">
-          Isolating the empirical contributions of the Coordinator, SSL encoder, trigger vector, and optimization scheme.
+        <motion.p variants={fadeUp} className="text-xs sm:text-sm text-theme-secondary mt-1 max-w-3xl">
+          Validating architecture-agnostic transfer (Table 5) and SSL pre-training + SPSA-GC synergy (Table 6) on EuroSAT.
         </motion.p>
       </div>
 
-      {/* Grid: Paper Figure Placeholder + Ablation Breakdown */}
       <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-5 flex-1 items-stretch">
-        {/* Left: Original Paper Ablation Placeholder */}
+        {/* Left: Paper Ablation Placeholder */}
         <div className="md:col-span-6 flex flex-col justify-between">
           <ImagePlaceholder
             figure={paperFigures.ablationStudy}
@@ -35,52 +34,74 @@ export const Slide18Ablation: React.FC = () => {
           />
         </div>
 
-        {/* Right: Structured Ablation Findings */}
-        <div className="md:col-span-6 flex flex-col justify-between p-4 rounded-2xl border border-theme-border bg-theme-card text-xs space-y-2">
-          <span className="font-bold text-theme-primary flex items-center gap-1.5 uppercase tracking-wider text-xs pb-1 border-b border-theme-border">
-            <SlidersHorizontal className="w-4 h-4 text-theme-accent" /> Key Ablation Insights (CVPR 2023)
-          </span>
+        {/* Right: Table 5 & Table 6 Compact Breakdown */}
+        <div className="md:col-span-6 flex flex-col justify-between gap-3">
+          {/* Table 5: Backbone Ablation */}
+          <div className="p-4 rounded-xl border border-theme-border bg-theme-card text-xs space-y-2">
+            <span className="font-bold text-theme-primary flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
+              <Cpu className="w-4 h-4 text-theme-accent" /> Table 5: Target Backbones (EuroSAT)
+            </span>
+            <ul className="space-y-1.5 text-theme-secondary text-[11px]">
+              <li>
+                <strong className="text-rose-600 dark:text-rose-400">CNN Bottleneck:</strong> BAR &amp; VP+SPSA-GC fail on RN50 (26.9% &amp; 34.7% vs ZS 37.5%).
+              </li>
+              <li>
+                <strong className="text-emerald-700 dark:text-emerald-300">BlackVIP (ViT-B/16 Coord.):</strong> Improves every backbone &rarr; <strong>60.2% avg</strong> (RN50: 48.4%, RN101: 51.3%, ViT-B/16: 73.1%).
+              </li>
+            </ul>
+          </div>
 
-          <div className="space-y-2.5 flex-1 flex flex-col justify-between">
-            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/60">
-              <span className="font-bold text-rose-600 dark:text-rose-400 block mb-0.5">
-                1. Without Coordinator (Raw Pixel Optimization):
-              </span>
-              <span className="text-theme-muted">
-                Optimization completely stalls. Direct pixel search in 150K dimensions produces near zero-shot random walk.
-              </span>
-            </div>
+          {/* Table 6: Coordinator Weights x SPSA */}
+          <div className="p-4 rounded-xl border border-theme-accent bg-theme-card shadow-slide-card text-xs space-y-2 flex-1 flex flex-col justify-between">
+            <span className="font-bold text-theme-accent flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
+              <SlidersHorizontal className="w-4 h-4" /> Table 6: Coordinator Weights &times; Optimizer
+            </span>
 
-            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/60">
-              <span className="font-bold text-theme-primary block mb-0.5">
-                2. SSL Encoder Choice (DINO vs MAE):
-              </span>
-              <span className="text-theme-secondary">
-                DINO outperforms MAE. DINO features capture explicit semantic boundaries and class-aware segmentations, which guide prompt generation far more effectively.
-              </span>
-            </div>
-
-            <div className="p-3 rounded-xl bg-theme-highlight/40 border border-theme-accent/30">
-              <span className="font-bold text-theme-accent block mb-0.5">
-                3. Impact of Trigger Vector &phi;_t:
-              </span>
-              <span className="text-theme-secondary">
-                Removing &phi;_t drops target transfer performance by 4-8%, confirming that the prompt requires both global task identity and local image context.
-              </span>
+            <div className="overflow-hidden rounded-lg border border-theme-border bg-white dark:bg-slate-900">
+              <table className="w-full text-[11px] font-mono text-left">
+                <thead className="bg-theme-card text-theme-muted border-b border-theme-border">
+                  <tr>
+                    <th className="py-1.5 px-2.5">Encoder Pre-training</th>
+                    <th className="py-1.5 px-2">SPSA</th>
+                    <th className="py-1.5 px-2">SPSA-GC</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-theme-border/60 text-theme-secondary">
+                  <tr>
+                    <td className="py-1.5 px-2.5">Zero-Shot Baseline</td>
+                    <td className="py-1.5 px-2" colSpan={2}>47.9%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1.5 px-2.5">Scratch (Random Init)</td>
+                    <td className="py-1.5 px-2">49.6%</td>
+                    <td className="py-1.5 px-2">49.5%</td>
+                  </tr>
+                  <tr>
+                    <td className="py-1.5 px-2.5">Supervised Pre-trained</td>
+                    <td className="py-1.5 px-2">59.4%</td>
+                    <td className="py-1.5 px-2">65.2%</td>
+                  </tr>
+                  <tr className="bg-emerald-500/10 font-bold text-emerald-700 dark:text-emerald-300">
+                    <td className="py-1.5 px-2.5">SSL (MAE) — BlackVIP</td>
+                    <td className="py-1.5 px-2">69.4%</td>
+                    <td className="py-1.5 px-2">73.1% (+3.7%)</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-theme-accent flex-shrink-0" />
           <span>
-            <strong>Architectural Validation: </strong> Every architectural design choice in BlackVIP is empirically justified: the Coordinator provides parameter efficiency, DINO provides semantic priors, and SPSA-GC provides convergence stability.
+            <strong>Takeaway:</strong> SSL MAE features outperform supervised/scratch encoders, and SPSA-GC adds <strong>+3.7%</strong> over standard SPSA.
           </span>
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">Table 3 in paper</span>
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">Table 5 &amp; Table 6</span>
       </motion.div>
     </motion.div>
   );

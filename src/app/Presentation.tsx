@@ -53,6 +53,36 @@ export const Presentation: React.FC = () => {
   // Fullscreen State
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Touch swipe tracking for mobile navigation
+  const touchStartRef = React.useRef<{ x: number; y: number } | null>(null);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length !== 1) return;
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      if (!touchStartRef.current || e.changedTouches.length !== 1) return;
+      const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
+      const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
+      touchStartRef.current = null;
+
+      // Require clear horizontal swipe (> 55px and mostly horizontal)
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        if (dx < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    },
+    [nextSlide, prevSlide]
+  );
+
   // Theme State
   const [currentTheme, setCurrentTheme] = useState<PresentationTheme>(defaultTheme);
 
@@ -151,7 +181,11 @@ export const Presentation: React.FC = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-theme-bg text-theme-primary overflow-hidden relative font-sans">
+    <div
+      className="w-screen h-screen supports-[height:100dvh]:h-[100dvh] flex flex-col bg-theme-bg text-theme-primary overflow-hidden relative font-sans"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Top Slide Progress Bar */}
       <ProgressBar current={currentSlide} total={totalSlides} />
 

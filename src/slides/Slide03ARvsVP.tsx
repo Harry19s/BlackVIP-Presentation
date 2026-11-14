@@ -30,7 +30,7 @@ export const Slide03ARvsVP: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 mb-3 border-b border-theme-border/60">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-600">
+                <div className="p-2 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400">
                   <ShieldAlert className="w-5 h-5" />
                 </div>
                 <div>
@@ -38,23 +38,23 @@ export const Slide03ARvsVP: React.FC = () => {
                   <span className="text-[11px] text-theme-muted font-mono">Elsayed et al. (ICLR 2019)</span>
                 </div>
               </div>
-              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/40 text-rose-600 border border-rose-200">
+              <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
                 Task Hijacking
               </span>
             </div>
 
             {/* Visual Pipeline with Visible Flow Arrows */}
-            <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/80 flex items-center justify-between gap-1 mb-3 overflow-x-auto">
-              <div className="w-20 h-16 rounded-lg border-2 border-rose-400 bg-rose-50 dark:bg-rose-950/20 flex flex-col items-center justify-center text-[10px] text-center p-1 font-semibold text-rose-700 flex-shrink-0">
+            <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/80 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-1 mb-3 overflow-x-auto">
+              <div className="w-full sm:w-20 h-12 sm:h-16 rounded-lg border-2 border-rose-400 bg-rose-50 dark:bg-rose-950/20 flex flex-col items-center justify-center text-[10px] text-center p-1 font-semibold text-rose-700 dark:text-rose-300 flex-shrink-0">
                 Fixed Noise Frame
               </div>
-              <ArrowConnector label="Embed" length="short" />
-              <div className="w-24 h-16 rounded-lg bg-slate-200 dark:bg-slate-800 flex flex-col items-center justify-center text-[11px] font-bold text-slate-700 dark:text-slate-300 flex-shrink-0">
+              <ArrowConnector label="Embed" length="short" responsive="sm" />
+              <div className="w-full sm:w-24 h-12 sm:h-16 rounded-lg bg-slate-200 dark:bg-slate-800 flex flex-col items-center justify-center text-[11px] font-bold text-slate-700 dark:text-slate-300 flex-shrink-0">
                 <span>ImageNet CNN</span>
                 <span className="text-[9px] opacity-60">Fixed Weights</span>
               </div>
-              <ArrowConnector label="Output" length="short" />
-              <div className="text-[10px] bg-rose-100 dark:bg-rose-900/40 p-2 rounded-lg font-mono text-rose-800 dark:text-rose-200 text-center flex-shrink-0">
+              <ArrowConnector label="Output" length="short" responsive="sm" />
+              <div className="w-full sm:w-auto text-[10px] bg-rose-100 dark:bg-rose-900/40 p-2 rounded-lg font-mono text-rose-800 dark:text-rose-200 text-center flex-shrink-0">
                 Hardcoded Label Map
                 <span className="block text-[8px] opacity-75">e.g. Dog &rarr; Digit 3</span>
               </div>
@@ -86,7 +86,7 @@ export const Slide03ARvsVP: React.FC = () => {
           <div>
             <div className="flex items-center justify-between pb-3 mb-3 border-b border-theme-border/60">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-lg bg-theme-accent text-white">
+                <div className="p-2 rounded-lg bg-theme-accent text-white dark:text-slate-950">
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <div>
@@ -100,17 +100,17 @@ export const Slide03ARvsVP: React.FC = () => {
             </div>
 
             {/* Visual Pipeline with Visible Flow Arrows */}
-            <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/80 flex items-center justify-between gap-1 mb-3 overflow-x-auto">
-              <div className="w-20 h-16 rounded-lg border-2 border-theme-accent bg-blue-50 dark:bg-blue-950/20 flex flex-col items-center justify-center text-[10px] text-center p-1 font-semibold text-theme-accent flex-shrink-0">
+            <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border/80 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-1 mb-3 overflow-x-auto">
+              <div className="w-full sm:w-20 h-12 sm:h-16 rounded-lg border-2 border-theme-accent bg-blue-50 dark:bg-blue-950/20 flex flex-col items-center justify-center text-[10px] text-center p-1 font-semibold text-theme-accent flex-shrink-0">
                 Visual Prompt + Image
               </div>
-              <ArrowConnector label="Steer" length="short" />
-              <div className="w-24 h-16 rounded-lg bg-theme-highlight/60 flex flex-col items-center justify-center text-[11px] font-bold text-theme-accent flex-shrink-0">
+              <ArrowConnector label="Steer" length="short" responsive="sm" />
+              <div className="w-full sm:w-24 h-12 sm:h-16 rounded-lg bg-theme-highlight/60 flex flex-col items-center justify-center text-[11px] font-bold text-theme-accent flex-shrink-0">
                 <span>Vision Backbone</span>
-                <span className="text-[9px] opacity-75">CLIP / ViT / DINO</span>
+                <span className="text-[9px] opacity-75">CLIP / ViT / MAE</span>
               </div>
-              <ArrowConnector label="Predict" length="short" />
-              <div className="text-[10px] bg-theme-highlight p-2 rounded-lg font-mono text-theme-accent text-center flex-shrink-0">
+              <ArrowConnector label="Predict" length="short" responsive="sm" />
+              <div className="w-full sm:w-auto text-[10px] bg-theme-highlight p-2 rounded-lg font-mono text-theme-accent text-center flex-shrink-0">
                 Semantic Target Classes
                 <span className="block text-[8px] opacity-75">Natural text/vision alignment</span>
               </div>
@@ -139,7 +139,7 @@ export const Slide03ARvsVP: React.FC = () => {
       </motion.div>
 
       {/* Structured Comparison Matrix Footer */}
-      <motion.div variants={fadeUp} className="p-3 rounded-xl bg-theme-card border border-theme-border text-xs flex items-center justify-between gap-4">
+      <motion.div variants={fadeUp} className="p-3 rounded-xl bg-theme-card border border-theme-border text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <div className="flex items-center gap-2">
           <Split className="w-4 h-4 text-theme-accent" />
           <span className="font-bold text-theme-primary">Takeaway: </span>

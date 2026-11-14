@@ -15,7 +15,7 @@ export const Slide01Title: React.FC = () => {
       {/* Top Banner / Venue badge */}
       <motion.div variants={fadeUp} className="flex items-center justify-between pb-2 border-b border-theme-border/60">
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-theme-accent text-white shadow-sm flex items-center gap-1.5">
+          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-theme-accent text-white dark:text-slate-950 shadow-sm flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5" /> CVPR 2023
           </span>
           <span className="px-3 py-1 rounded-full text-xs font-semibold bg-theme-highlight text-theme-accent border border-theme-accent/20">
@@ -45,7 +45,7 @@ export const Slide01Title: React.FC = () => {
           </div>
 
           {/* Authors Card */}
-          <div className="p-3.5 rounded-xl bg-theme-card/60 border border-theme-border flex items-center justify-between">
+          <div className="p-3.5 rounded-xl bg-theme-card/60 border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
             <div>
               <p className="text-[11px] font-bold uppercase tracking-wider text-theme-muted mb-0.5">
                 Original Paper Authors (CVPR 2023)

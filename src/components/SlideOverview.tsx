@@ -62,8 +62,8 @@ export const SlideOverview: React.FC<SlideOverviewProps> = ({
                   <span
                     className={`font-mono font-bold text-xs px-2 py-0.5 rounded-md ${
                       isCurrent
-                        ? 'bg-theme-accent text-white'
-                        : 'bg-theme-border/60 text-theme-secondary group-hover:bg-theme-accent group-hover:text-white'
+                        ? 'bg-theme-accent text-white dark:text-slate-950'
+                        : 'bg-theme-border/60 text-theme-secondary group-hover:bg-theme-accent group-hover:text-white dark:group-hover:text-slate-950'
                     }`}
                   >
                     #{String(slide.id).padStart(2, '0')}

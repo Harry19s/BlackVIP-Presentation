@@ -29,7 +29,7 @@ export const Slide06Coordinator: React.FC = () => {
         {/* Left Column: Why Direct Optimization Fails */}
         <div className="lg:col-span-5 flex flex-col justify-between gap-3">
           <div className="p-4 rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50/50 dark:bg-rose-950/20 text-xs text-theme-secondary space-y-2">
-            <div className="flex items-center gap-2 text-rose-600 font-bold">
+            <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-bold">
               <AlertCircle className="w-4 h-4" />
               <span>The Pixel-Space Optimization Bottleneck</span>
             </div>
@@ -72,46 +72,46 @@ export const Slide06Coordinator: React.FC = () => {
           </div>
 
           {/* Node flow */}
-          <div className="flex flex-wrap items-center justify-center gap-2 w-full my-auto py-2">
+          <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-2 w-full my-auto py-2">
             <DiagramNode
               label={<span className="flex items-center justify-center gap-1"><span>Input</span><Equation math="x" block={false} /></span>}
               sublabel="3 × 224 × 224"
               type="input"
-              className="w-24 text-[11px]"
+              className="w-40 md:w-24 text-[11px]"
             />
 
-            <ArrowConnector label={<Equation math="x" block={false} />} length="short" />
+            <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" />
 
             <DiagramNode
               label="Frozen SSL Encoder"
-              sublabel={<span className="flex items-center justify-center gap-1"><Equation math="f(\cdot)" block={false} /><span>(DINO)</span></span>}
+              sublabel={<span className="flex items-center justify-center gap-1"><Equation math="f(\cdot)" block={false} /><span>(MAE)</span></span>}
               type="frozen"
-              className="w-32 text-xs"
+              className="w-44 md:w-32 text-xs"
             />
 
-            <ArrowConnector label={<Equation math="z = f(x)" block={false} />} length="short" />
+            <ArrowConnector label={<Equation math="z = f(x)" block={false} />} length="short" responsive="md" />
 
-            <div className="flex flex-col items-center p-2 rounded-lg bg-theme-highlight border border-theme-accent/40 text-center w-28">
+            <div className="flex flex-col items-center p-2 rounded-lg bg-theme-highlight border border-theme-accent/40 text-center w-40 md:w-28">
               <span className="text-[10px] font-bold text-theme-accent uppercase">Latent Code</span>
               <Equation math="z \in \mathbb{R}^d" block={false} className="text-[11px]" />
             </div>
 
-            <ArrowConnector label={<Equation math="+ \phi_t" block={false} />} length="short" />
+            <ArrowConnector label={<Equation math="+ \phi_t" block={false} />} length="short" responsive="md" />
 
             <DiagramNode
               label="Trainable Decoder"
               sublabel={<Equation math="g_{\phi_d}(\cdot)" block={false} />}
               type="trainable"
-              className="w-32 text-xs"
+              className="w-44 md:w-32 text-xs"
             />
 
-            <ArrowConnector label={<Equation math="v(x)" block={false} />} length="short" />
+            <ArrowConnector label={<Equation math="v(x)" block={false} />} length="short" responsive="md" />
 
             <DiagramNode
               label={<span className="flex items-center justify-center gap-1"><span>Visual Prompt</span><Equation math="v" block={false} /></span>}
               sublabel="Structured Canvas"
               type="output"
-              className="w-28 text-[11px]"
+              className="w-44 md:w-28 text-[11px]"
             />
           </div>
 
@@ -123,12 +123,12 @@ export const Slide06Coordinator: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           <strong className="text-theme-primary">Key Advantage: </strong>
           The frozen encoder supplies high-level semantic vision priors (edges, object contours, semantic categories) with zero training cost, while the trainable decoder optimizes only a compact parameter space.
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           ~100x variance reduction vs pixel search
         </span>
       </motion.div>

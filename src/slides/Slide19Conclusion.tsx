@@ -44,41 +44,41 @@ export const Slide19Conclusion: React.FC = () => {
         </span>
 
         {/* Simplified clean flow */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 w-full my-auto">
+        <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-2 sm:gap-3 w-full my-auto py-2">
           <DiagramNode
             label={<span className="flex items-center justify-center gap-1"><span>Input</span><Equation math="x" block={false} /></span>}
             sublabel="Target Domain"
             type="input"
             icon={<ImgIcon className="w-4 h-4 text-gray-500" />}
-            className="w-32 text-xs"
+            className="w-44 md:w-32 text-xs"
           />
 
-          <ArrowConnector label={<Equation math="x" block={false} />} length="short" />
+          <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" />
 
           <DiagramNode
             label="Coordinator"
             sublabel="Prompt Reparameterizer"
             type="trainable"
-            className="w-36 text-xs"
+            className="w-44 md:w-36 text-xs"
           />
 
-          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" />
+          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" responsive="md" />
 
           <DiagramNode
             label={<span className="flex items-center justify-center gap-1"><span>Visual Prompt</span><Equation math="v" block={false} /></span>}
             sublabel={<Equation math="v(x; \phi)" block={false} />}
             type="output"
-            className="w-36 text-xs"
+            className="w-44 md:w-36 text-xs"
           />
 
-          <ArrowConnector label="Forward" length="short" />
+          <ArrowConnector label="Forward" length="short" responsive="md" />
 
           <DiagramNode
             label="Frozen Vision Model"
             sublabel="Target Foundation Backbone"
             type="frozen"
             icon={<Cpu className="w-4 h-4 text-slate-500" />}
-            className="w-40 text-xs"
+            className="w-44 md:w-40 text-xs"
           />
         </div>
 
@@ -101,7 +101,7 @@ export const Slide19Conclusion: React.FC = () => {
           </div>
 
           <div className="p-3.5 rounded-xl bg-theme-highlight/30 border border-theme-accent/30 flex items-start gap-3">
-            <div className="p-2 rounded-lg bg-theme-accent text-white flex-shrink-0">
+            <div className="p-2 rounded-lg bg-theme-accent text-white dark:text-slate-950 flex-shrink-0">
               <Award className="w-5 h-5" />
             </div>
             <div className="text-xs">
@@ -119,10 +119,10 @@ export const Slide19Conclusion: React.FC = () => {
       {/* Thank you & Questions Footer */}
       <motion.div
         variants={fadeUp}
-        className="p-4 rounded-xl bg-gradient-to-r from-theme-card via-theme-highlight/40 to-theme-card border border-theme-border flex items-center justify-between"
+        className="p-4 rounded-xl bg-gradient-to-r from-theme-card via-theme-highlight/40 to-theme-card border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0"
       >
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-theme-accent text-white">
+          <div className="p-2 rounded-lg bg-theme-accent text-white dark:text-slate-950">
             <HelpCircle className="w-5 h-5" />
           </div>
           <div>
@@ -137,7 +137,7 @@ export const Slide19Conclusion: React.FC = () => {
 
         <button
           onClick={triggerConfetti}
-          className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-theme-accent text-white hover:bg-blue-600 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+          className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-theme-accent text-white dark:text-slate-950 hover:bg-blue-600 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
         >
           <Sparkles className="w-4 h-4" />
           <span>Celebrate Presentation</span>

@@ -80,74 +80,69 @@ export const DiagramNode: React.FC<DiagramNodeProps> = ({
 export const ArrowConnector: React.FC<{
   label?: React.ReactNode;
   orientation?: 'horizontal' | 'vertical';
+  responsive?: 'sm' | 'md' | 'lg' | false;
   variant?: 'solid' | 'dashed' | 'feedback';
   length?: 'short' | 'medium' | 'long';
   className?: string;
 }> = ({
   label,
   orientation = 'horizontal',
+  responsive = false,
   variant = 'solid',
   length = 'medium',
   className = '',
 }) => {
-  const isHorizontal = orientation === 'horizontal';
-
-  // Significantly extended widths for clear horizontal arrow visibility
   const widthClass = {
-    short: 'w-14 sm:w-16',
-    medium: 'w-20 sm:w-28',
-    long: 'w-28 sm:w-36',
+    short: 'w-12 sm:w-16',
+    medium: 'w-16 sm:w-28',
+    long: 'w-24 sm:w-36',
   }[length];
 
   const heightClass = {
-    short: 'h-10',
-    medium: 'h-14',
-    long: 'h-20',
+    short: 'h-9',
+    medium: 'h-12',
+    long: 'h-16',
   }[length];
 
-  if (isHorizontal) {
-    return (
-      <div className={`flex flex-col items-center justify-center px-1 select-none flex-shrink-0 ${className}`}>
-        {label && (
-          <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs mb-1 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
-            {renderMathOrText(label)}
-          </span>
-        )}
-        <div className={`relative flex items-center justify-center ${widthClass} h-6`}>
-          <svg className="w-full h-6 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
-            <defs>
-              <marker
-                id="arrowhead-flow"
-                markerWidth="8"
-                markerHeight="8"
-                refX="6"
-                refY="4"
-                orient="auto"
-              >
-                <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--color-accent, #2563EB)" />
-              </marker>
-            </defs>
-            {/* Extended Arrow Line Shaft */}
-            <line
-              x1="2"
-              y1="12"
-              x2="90"
-              y2="12"
-              stroke="var(--color-accent, #2563EB)"
-              strokeWidth="2.5"
-              strokeDasharray={variant === 'dashed' ? '5,4' : undefined}
-              className={variant === 'feedback' ? 'animate-pulse' : ''}
-              markerEnd="url(#arrowhead-flow)"
-            />
-          </svg>
-        </div>
+  const renderHorizontal = (extraClass = '') => (
+    <div className={`flex flex-col items-center justify-center px-1 select-none flex-shrink-0 ${extraClass} ${className}`}>
+      {label && (
+        <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs mb-1 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
+          {renderMathOrText(label)}
+        </span>
+      )}
+      <div className={`relative flex items-center justify-center ${widthClass} h-6`}>
+        <svg className="w-full h-6 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
+          <defs>
+            <marker
+              id="arrowhead-flow"
+              markerWidth="8"
+              markerHeight="8"
+              refX="6"
+              refY="4"
+              orient="auto"
+            >
+              <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--color-accent, #2563EB)" />
+            </marker>
+          </defs>
+          <line
+            x1="2"
+            y1="12"
+            x2="90"
+            y2="12"
+            stroke="var(--color-accent, #2563EB)"
+            strokeWidth="2.5"
+            strokeDasharray={variant === 'dashed' ? '5,4' : undefined}
+            className={variant === 'feedback' ? 'animate-pulse' : ''}
+            markerEnd="url(#arrowhead-flow)"
+          />
+        </svg>
       </div>
-    );
-  }
+    </div>
+  );
 
-  // Vertical orientation
-  return (
-    <div className={`flex flex-row items-center justify-center py-1 select-none flex-shrink-0 ${className}`}>
+  const renderVertical = (extraClass = '') => (
+    <div className={`flex flex-row items-center justify-center py-0.5 select-none flex-shrink-0 ${extraClass} ${className}`}>
       <div className={`relative flex flex-col items-center justify-center ${heightClass} w-6`}>
         <svg className="w-6 h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 24 100">
           <defs>
@@ -155,11 +150,11 @@ export const ArrowConnector: React.FC<{
               id="arrowhead-flow-v"
               markerWidth="8"
               markerHeight="8"
-              refX="4"
-              refY="6"
+              refX="6"
+              refY="4"
               orient="auto"
             >
-              <path d="M 0 0 L 8 0 L 4 8 z" fill="var(--color-accent, #2563EB)" />
+              <path d="M 0 0 L 8 4 L 0 8 z" fill="var(--color-accent, #2563EB)" />
             </marker>
           </defs>
           <line
@@ -176,10 +171,23 @@ export const ArrowConnector: React.FC<{
         </svg>
       </div>
       {label && (
-        <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs ml-1 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
+        <span className="text-[10px] font-bold text-theme-accent bg-theme-highlight px-2 py-0.5 rounded-full shadow-xs ml-1.5 whitespace-nowrap border border-theme-accent/30 z-10 flex items-center justify-center">
           {renderMathOrText(label)}
         </span>
       )}
     </div>
   );
+
+  if (responsive) {
+    const showH = responsive === 'sm' ? 'hidden sm:flex' : responsive === 'md' ? 'hidden md:flex' : 'hidden lg:flex';
+    const showV = responsive === 'sm' ? 'flex sm:hidden' : responsive === 'md' ? 'flex md:hidden' : 'flex lg:hidden';
+    return (
+      <>
+        {renderVertical(showV)}
+        {renderHorizontal(showH)}
+      </>
+    );
+  }
+
+  return orientation === 'horizontal' ? renderHorizontal() : renderVertical();
 };

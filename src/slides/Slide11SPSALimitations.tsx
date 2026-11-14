@@ -121,7 +121,7 @@ export const Slide11SPSALimitations: React.FC = () => {
       </motion.div>
 
       {/* Transition Banner */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           <strong className="text-theme-primary">The Core Question: </strong>
           How can we reduce this variance and accelerate descent without paying for additional oracle queries?

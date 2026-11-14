@@ -114,12 +114,12 @@ export const Slide13SPSAGC: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           <strong className="text-theme-primary">Theoretical Rigor: </strong>
           SPSA-GC does not alter the black-box boundary: the target vision model is queried only for forward evaluations, while the optimizer updates the Coordinator weights and trigger vector.
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           O(1) query cost per iteration
         </span>
       </motion.div>

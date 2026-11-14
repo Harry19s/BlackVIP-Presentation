@@ -16,72 +16,69 @@ export const Slide14ExperimentalSetup: React.FC = () => {
       <div>
         <SectionLabel part="Part 5" section="Experimental Evaluation" />
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-extrabold text-theme-primary">
-          Experimental Setup & Evaluation Protocol
+          Experimental Setup &amp; Evaluation Protocol
         </motion.h2>
-        <motion.p variants={fadeUp} className="text-xs sm:text-sm text-theme-secondary mt-1 max-w-4xl">
-          Comprehensive empirical testing across synthetic benchmarks, real-world transfer datasets, and out-of-distribution shifts.
+        <motion.p variants={fadeUp} className="text-xs sm:text-sm text-theme-secondary mt-1 max-w-3xl">
+          Evaluated across 14 diverse transfer benchmarks, 2 synthetic stress tests, and 100D Rosenbrock optimization.
         </motion.p>
       </div>
 
-      {/* 4 Expanded Overview Cards */}
+      {/* 4 Compact Overview Cards */}
       <motion.div variants={scaleIn} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 items-stretch">
         <ComparisonCard
-          title="Datasets & Benchmarks"
-          badge="14+ Tasks"
+          title="Datasets"
+          badge="14 + 2 Tasks"
           badgeVariant="neutral"
           icon={Database}
           points={[
-            "Synthetic: Biased-MNIST (color bias), Loc-MNIST (spatial shift).",
-            "Natural Vision: CIFAR-100, DTD, Flowers102, SVHN, Food101, EuroSAT.",
-            "Specialized: Oxford-Pets, Stanford Cars, Caltech-101.",
-            "Robustness: ImageNet-C, ImageNet-R (corruptions & distribution shifts).",
+            "14 Transfer Benchmarks: Caltech, Pets, Cars, Flowers, Food, Aircraft, SUN, DTD.",
+            "Structured & Scene: SVHN, EuroSAT, RESISC45, CLEVR, UCF101, ImageNet.",
+            "2 Synthetic: Biased-MNIST (color shift) & Loc-MNIST (edge location).",
           ]}
-          footerNote="Diverse vision domains & modalities."
+          footerNote="Sec. 5.1 & Table 3"
           className="h-full justify-between"
         />
 
         <ComparisonCard
-          title="Backbone Vision Models"
-          badge="Zero Access"
+          title="Target & Encoder"
+          badge="Black-Box PTM"
           badgeVariant="accent"
           icon={Cpu}
           points={[
-            "CLIP (ViT-B/16, ViT-B/32): Multi-modal text-image foundation.",
-            "DINO (ViT-B/16): Self-supervised transformer representations.",
-            "MoCo-v3: Contrastive self-supervised visual backbone.",
-            "ResNet-50: Standard convolutional architecture baseline.",
+            "Default Target PTM: CLIP ViT-B/16 (zero-shot text-image classifier).",
+            "Backbone Ablation: RN50, RN101, ViT-B/32, ViT-B/16 (Table 5).",
+            "Coordinator Encoder: Frozen ImageNet vit-mae-base (MAE).",
           ]}
-          footerNote="All target backbone weights strictly frozen."
+          footerNote="Target weights strictly frozen"
           className="h-full justify-between"
         />
 
         <ComparisonCard
-          title="Compared Baselines"
-          badge="SOTA Methods"
+          title="Baselines"
+          badge="Fair Budgets"
           badgeVariant="secondary"
           icon={Sliders}
           points={[
-            "Zero-Shot: Untuned foundation model inference baseline.",
-            "Linear Probing: Training linear classifier head on frozen features.",
-            "White-Box VP: Bahng et al. (with backprop gradient access).",
-            "Alternative ZOO: Standard SPSA, RDSA, and ZO-SGD.",
+            "ZS: CLIP Zero-Shot classifier baseline.",
+            "BAR: Black-box Adversarial Reprogramming (37K params).",
+            "VP w/ SPSA-GC: Frame prompt (69K params) + SPSA-GC.",
+            "White-Box Upper Bounds: VP, LP, and Full Fine-Tuning (FT).",
           ]}
-          footerNote="Direct peer comparisons across identical budgets."
+          footerNote="Tables 2, 3 & 4"
           className="h-full justify-between"
         />
 
         <ComparisonCard
-          title="Evaluation Regimes"
-          badge="Rigorous"
+          title="Evaluation Protocol"
+          badge="16-Shot Default"
           badgeVariant="success"
           icon={Layers}
           points={[
-            "Standard Transfer: Target dataset classification accuracy.",
-            "Few-Shot Adaptation: 1-shot, 5-shot, and 10-shot samples per class.",
-            "Distribution Shifts: Robustness under 99% correlation bias.",
-            "Query Efficiency: Accuracy trajectory per oracle evaluation count.",
+            "Few-Shot Split: 16-shot training, full test set (3 repeated runs).",
+            "Synthetic Regimes: 16-shot & 32-shot under ρ ∈ {0.8, 0.9} & 1:1 / 1:4.",
+            "Efficiency Metrics: Peak memory (MB), params, API queries & cost.",
           ]}
-          footerNote="Standardized CVPR 2023 evaluation protocol."
+          footerNote="CVPR 2023 Protocol"
           className="h-full justify-between"
         />
       </motion.div>
@@ -91,11 +88,11 @@ export const Slide14ExperimentalSetup: React.FC = () => {
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-theme-accent flex-shrink-0" />
           <span>
-            <strong className="text-theme-primary">Coordinator Default Configuration: </strong>
-            Frozen DINO ViT-B/16 encoder with lightweight convolutional transpose decoder; trigger vector dimension <span className="font-mono text-theme-accent font-semibold">d_t = 512</span>. Total trainable parameters: ~180K.
+            <strong className="text-theme-primary">Coordinator Default: </strong>
+            Frozen <span className="font-mono text-theme-accent font-semibold">vit-mae-base</span> encoder + lightweight decoder &rarr; only <strong className="text-theme-primary">9K learnable parameters</strong> (Table 4).
           </span>
         </div>
-        <span className="text-[11px] font-mono text-theme-muted whitespace-nowrap">CVPR 2023 Protocol</span>
+        <span className="text-[11px] font-mono text-theme-muted whitespace-nowrap">Section 5.1 &amp; Table 4</span>
       </motion.div>
     </motion.div>
   );

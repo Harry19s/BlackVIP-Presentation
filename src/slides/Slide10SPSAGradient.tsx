@@ -77,22 +77,22 @@ export const Slide10SPSAGradient: React.FC = () => {
             </div>
 
             <div className="space-y-2 text-xs text-theme-secondary mt-3">
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
                 <span>1. Current Parameter Point:</span>
                 <Equation math="\phi_i = [1.0, 2.0]^T" block={false} />
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
                 <span>2. Perturbation (<Equation math="c_i = 0.1, \Delta_i = [+1, -1]^T" block={false} />):</span>
                 <span className="font-mono text-theme-primary font-semibold">[+0.1, -0.1]</span>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
                 <span>3. Forward Oracle Evaluations:</span>
                 <span className="font-mono text-theme-accent font-semibold">L(+) = 0.85 &bull; L(-) = 0.75</span>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex items-center justify-between">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
                 <span>4. Scalar Loss Difference:</span>
                 <Equation math="\Delta \mathcal{L} = 0.85 - 0.75 = 0.10" block={false} />
               </div>
@@ -112,11 +112,11 @@ export const Slide10SPSAGradient: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           The mathematical expectation <Equation math="\mathbb{E}[\hat{g}_i(\phi_i) \mid \phi_i] = \nabla \mathcal{L}(\phi_i) + \mathcal{O}(c_i^2)" block={false} /> guarantees unbiasedness as <Equation math="c_i \to 0" block={false} />.
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           Second-order Taylor expansion bound
         </span>
       </motion.div>

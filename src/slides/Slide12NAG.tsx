@@ -179,7 +179,7 @@ export const Slide12NAG: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-theme-accent flex-shrink-0" />
           <span>
@@ -187,7 +187,7 @@ export const Slide12NAG: React.FC = () => {
             Since SPSA estimates suffer from noise, substituting the look-ahead position into SPSA provides a natural stabilization mechanism without adding extra queries.
           </span>
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           Anticipatory Damping
         </span>
       </motion.div>

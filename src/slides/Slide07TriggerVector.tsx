@@ -60,8 +60,8 @@ export const Slide07TriggerVector: React.FC = () => {
           </div>
 
           {/* Fusion Point */}
-          <div className="w-full flex items-center justify-center gap-3 py-2.5 bg-slate-100 dark:bg-slate-800/60 rounded-xl px-4 border border-theme-border/60 my-2">
-            <Zap className="w-4 h-4 text-theme-accent" />
+          <div className="w-full flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-2.5 bg-slate-100 dark:bg-slate-800/60 rounded-xl px-3 sm:px-4 border border-theme-border/60 my-2 text-center">
+            <Zap className="w-4 h-4 text-theme-accent flex-shrink-0" />
             <span className="text-xs font-semibold text-theme-primary">
               Conditioning Operation: Concatenation or Linear Projection
             </span>
@@ -69,12 +69,12 @@ export const Slide07TriggerVector: React.FC = () => {
           </div>
 
           {/* Decoder Output */}
-          <div className="flex items-center justify-center gap-3 w-full pt-1">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 w-full pt-1">
             <div className="p-2.5 px-4 rounded-xl bg-blue-600 text-white text-xs font-bold shadow-md flex items-center gap-1.5">
               <span>Trainable Decoder</span>
               <Equation math="g_{\phi_d}" block={false} className="text-white bg-blue-700/60" />
             </div>
-            <ArrowConnector label="Synthesize" length="short" />
+            <ArrowConnector label="Synthesize" length="short" responsive="sm" />
             <div className="p-2.5 px-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-400 text-emerald-800 dark:text-emerald-200 text-xs font-bold text-center">
               <div className="flex items-center justify-center gap-1">
                 <span>Visual Prompt</span>
@@ -99,7 +99,7 @@ export const Slide07TriggerVector: React.FC = () => {
                 <p className="flex items-center gap-1.5 flex-wrap">
                   <Equation math="\phi_d" block={false} highlight={true} className="text-xs font-bold" />
                   <strong className="text-theme-primary">(Decoder Weights):</strong>
-                  <span>Lightweight convolutional transpose or MLP layers (~100K-180K params).</span>
+                  <span>Lightweight convolutional decoder layers (jointly 9K learnable params with <Equation math="\phi_t" block={false} />).</span>
                 </p>
                 <p className="flex items-center gap-1.5 flex-wrap">
                   <Equation math="\phi_t" block={false} highlight={true} className="text-xs font-bold" />
@@ -120,11 +120,11 @@ export const Slide07TriggerVector: React.FC = () => {
       </motion.div>
 
       {/* Footer Takeaway */}
-      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex items-center justify-between">
+      <motion.div variants={fadeUp} className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0">
         <span>
           By optimizing only <Equation math="\phi = \{\phi_d, \phi_t\}" block={false} />, the zeroth-order search space is reduced by orders of magnitude compared to raw pixel dimensions.
         </span>
-        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-4">
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
           O(d_decoder + d_trigger) vs O(H x W x C)
         </span>
       </motion.div>

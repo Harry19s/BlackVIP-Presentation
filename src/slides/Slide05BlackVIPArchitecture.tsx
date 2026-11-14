@@ -30,50 +30,50 @@ export const Slide05BlackVIPArchitecture: React.FC = () => {
         className="p-5 rounded-2xl bg-theme-card border border-theme-border shadow-slide-card flex flex-col items-center justify-center relative flex-1"
       >
         {/* Forward Pass Flow */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 z-10 w-full my-auto">
+        <div className="flex flex-col lg:flex-row lg:flex-wrap items-center justify-center gap-2 sm:gap-3 z-10 w-full my-auto">
           {/* Input Image */}
           <DiagramNode
             label="Input Image x"
             sublabel="Target Domain"
             type="input"
             icon={<ImgIcon className="w-5 h-5 text-gray-600 dark:text-gray-300" />}
-            className="w-32"
+            className="w-44 lg:w-32"
           />
 
-          <ArrowConnector label="x" />
+          <ArrowConnector label="x" responsive="lg" />
 
           {/* Coordinator Box */}
-          <div className="p-3.5 rounded-xl border-2 border-dashed border-theme-accent bg-blue-50/60 dark:bg-blue-950/30 flex flex-col items-center gap-2 shadow-sm">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-theme-accent">
+          <div className="p-3 sm:p-3.5 rounded-xl border-2 border-dashed border-theme-accent bg-blue-50/60 dark:bg-blue-950/30 flex flex-col items-center gap-2 shadow-sm w-full max-w-sm lg:w-auto">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-theme-accent text-center">
               Coordinator Network (Reparameterizer)
             </span>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-center gap-2">
               <DiagramNode
                 label="Frozen SSL Encoder"
-                sublabel={<span className="flex items-center justify-center gap-1"><Equation math="f(\cdot)" block={false} /><span>(DINO)</span></span>}
+                sublabel={<span className="flex items-center justify-center gap-1"><Equation math="f(\cdot)" block={false} /><span>(MAE)</span></span>}
                 type="frozen"
-                className="w-32 text-xs"
+                className="w-40 sm:w-32 text-xs"
               />
-              <ArrowConnector label={<Equation math="f(x) + \phi_t" block={false} />} length="short" />
+              <ArrowConnector label={<Equation math="f(x) + \phi_t" block={false} />} length="short" responsive="sm" />
               <DiagramNode
                 label="Trainable Decoder"
                 sublabel={<Equation math="g_{\phi_d}(\cdot)" block={false} />}
                 type="trainable"
-                className="w-32 text-xs"
+                className="w-40 sm:w-32 text-xs"
               />
             </div>
           </div>
 
-          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" />
+          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" responsive="lg" />
 
           {/* Prompt + Image Combination */}
-          <div className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-theme-highlight border border-theme-accent/30 text-center w-36 shadow-xs">
+          <div className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-theme-highlight border border-theme-accent/30 text-center w-44 lg:w-36 shadow-xs">
             <span className="text-xs font-bold text-theme-accent">Prompted Input</span>
             <Equation math="x + v(x; \phi)" block={false} className="text-xs font-semibold" />
             <span className="text-[9px] text-theme-muted mt-0.5">Pixel Frame Overlay</span>
           </div>
 
-          <ArrowConnector label="Forward" length="short" />
+          <ArrowConnector label="Forward" length="short" responsive="lg" />
 
           {/* Frozen Black-Box Target Model */}
           <DiagramNode
@@ -81,22 +81,22 @@ export const Slide05BlackVIPArchitecture: React.FC = () => {
             sublabel="CLIP / ViT / ResNet"
             type="frozen"
             icon={<Cpu className="w-5 h-5 text-slate-600 dark:text-slate-400" />}
-            className="w-40"
+            className="w-44 lg:w-40"
           />
 
-          <ArrowConnector label="Predictions" length="short" />
+          <ArrowConnector label="Predictions" length="short" responsive="lg" />
 
           {/* Loss Oracle */}
           <DiagramNode
             label="Loss Oracle"
             sublabel={<Equation math="\mathcal{L}(\hat{y}, y)" block={false} />}
             type="loss"
-            className="w-28"
+            className="w-40 lg:w-28"
           />
         </div>
 
         {/* Backward Feedback Loop via SPSA-GC */}
-        <div className="mt-4 pt-3 border-t-2 border-dashed border-theme-border w-full flex items-center justify-between px-5 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-3">
+        <div className="mt-4 pt-3 border-t-2 border-dashed border-theme-border w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-3 sm:px-5 bg-slate-50 dark:bg-slate-900/50 rounded-xl p-3">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-blue-600 text-white animate-spin">
               <RefreshCw className="w-4 h-4" />
@@ -138,7 +138,7 @@ export const Slide05BlackVIPArchitecture: React.FC = () => {
             <strong className="text-theme-primary">2. Compact Learnable Decoder</strong>
           </div>
           <span className="text-theme-secondary text-[11px]">
-            Transforms latent codes + trigger vector into visual prompts (~180K parameters total).
+            Transforms latent codes + trigger vector into visual prompts (9K learnable parameters).
           </span>
         </div>
 

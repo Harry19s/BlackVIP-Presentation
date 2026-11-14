@@ -14,7 +14,7 @@ export const SectionLabel: React.FC<SectionLabelProps> = ({
   return (
     <div className={`flex items-center gap-2 mb-2 ${className}`}>
       {part && (
-        <span className="px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-theme-accent text-white">
+        <span className="px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-theme-accent text-white dark:text-slate-950">
           {part}
         </span>
       )}
