@@ -12,9 +12,9 @@ export const Slide18Ablation: React.FC = () => {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="h-full flex flex-col justify-between gap-4"
+      className="h-full min-h-0 flex flex-col justify-between gap-3 sm:gap-4"
     >
-      <div>
+      <div className="flex-shrink-0">
         <SectionLabel part="Part 5" section="Ablation Analysis" />
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-extrabold text-theme-primary">
           Ablation Study: Backbones &amp; Coordinator Design
@@ -24,18 +24,17 @@ export const Slide18Ablation: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-5 flex-1 items-stretch">
-        {/* Left: Paper Ablation Placeholder */}
-        <div className="md:col-span-6 flex flex-col justify-between">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+        {/* Left: Paper Ablation Tables */}
+        <div className="md:col-span-6 min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.ablationStudy}
-            aspectRatio="16 / 10"
-            className="h-full justify-between"
+            className="flex-1 min-h-0 h-full"
           />
         </div>
 
         {/* Right: Table 5 & Table 6 Compact Breakdown */}
-        <div className="md:col-span-6 flex flex-col justify-between gap-3">
+        <div className="md:col-span-6 min-h-0 flex flex-col justify-between gap-3">
           {/* Table 5: Backbone Ablation */}
           <div className="p-4 rounded-xl border border-theme-border bg-theme-card text-xs space-y-2">
             <span className="font-bold text-theme-primary flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">

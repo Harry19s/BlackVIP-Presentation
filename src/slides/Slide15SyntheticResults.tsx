@@ -13,9 +13,9 @@ export const Slide15SyntheticResults: React.FC = () => {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="h-full flex flex-col justify-between gap-4"
+      className="h-full min-h-0 flex flex-col justify-between gap-3 sm:gap-4"
     >
-      <div>
+      <div className="flex-shrink-0">
         <SectionLabel part="Part 5" section="Experimental Evaluation" />
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-extrabold text-theme-primary">
           Synthetic Benchmarks: Biased-MNIST &amp; Loc-MNIST
@@ -25,18 +25,17 @@ export const Slide15SyntheticResults: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-5 flex-1 items-stretch">
-        {/* Left: Paper Figure Placeholder */}
-        <div className="md:col-span-6 flex flex-col justify-between">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+        {/* Left: Paper Figure */}
+        <div className="md:col-span-6 min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.syntheticResults}
-            aspectRatio="16 / 10"
-            className="h-full justify-between"
+            className="flex-1 min-h-0 h-full"
           />
         </div>
 
         {/* Right: Concise Setup + Table 2 Numbers */}
-        <div className="md:col-span-6 flex flex-col justify-between gap-3">
+        <div className="md:col-span-6 min-h-0 flex flex-col justify-between gap-3">
           <div className="p-4 rounded-xl border border-theme-border bg-theme-card text-xs space-y-2">
             <span className="font-bold text-theme-primary flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
               <ShieldAlert className="w-4 h-4 text-theme-accent" /> Two Synthetic Stress Tests

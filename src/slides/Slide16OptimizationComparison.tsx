@@ -13,9 +13,9 @@ export const Slide16OptimizationComparison: React.FC = () => {
       variants={staggerContainer}
       initial="hidden"
       animate="visible"
-      className="h-full flex flex-col justify-between gap-4"
+      className="h-full min-h-0 flex flex-col justify-between gap-3 sm:gap-4"
     >
-      <div>
+      <div className="flex-shrink-0">
         <SectionLabel part="Part 5" section="Experimental Evaluation" />
         <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl font-extrabold text-theme-primary">
           Optimization Convergence &amp; Query Efficiency
@@ -25,35 +25,34 @@ export const Slide16OptimizationComparison: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-5 flex-1 items-stretch">
-        {/* Left: Paper Figure Placeholder */}
-        <div className="md:col-span-6 flex flex-col justify-between">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+        {/* Left: Paper Figures */}
+        <div className="md:col-span-6 min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.optimizationComparison}
-            aspectRatio="16 / 10"
-            className="h-full justify-between"
+            className="flex-1 min-h-0 h-full"
           />
         </div>
 
         {/* Right: Concise Method Comparison */}
-        <div className="md:col-span-6 flex flex-col justify-between gap-3">
+        <div className="md:col-span-6 min-h-0 flex flex-col justify-between gap-3">
           <div className="p-4 rounded-xl border border-theme-border bg-theme-card text-xs space-y-2 flex-1 flex flex-col justify-between">
             <div>
               <span className="font-bold text-theme-primary flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
                 <LineChart className="w-4 h-4 text-theme-accent" /> 100D Rosenbrock Benchmark (Fig. 3)
               </span>
               <div className="space-y-2 pt-2">
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-900 border border-theme-border/60">
-                  <span className="font-semibold text-theme-secondary">RGF (Baseline):</span>
-                  <span className="text-rose-600 dark:text-rose-400">Slow descent; collapses under loss noise.</span>
+                <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-white dark:bg-slate-900 border border-theme-border/60">
+                  <span className="font-semibold text-theme-secondary flex-shrink-0">RGF (Baseline):</span>
+                  <span className="text-rose-600 dark:text-rose-400 text-right">Slow descent; collapses under loss noise.</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-white dark:bg-slate-900 border border-theme-border/60">
-                  <span className="font-semibold text-theme-secondary">Standard SPSA:</span>
-                  <span className="text-theme-muted">Noise-tolerant, but slower convergence.</span>
+                <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-white dark:bg-slate-900 border border-theme-border/60">
+                  <span className="font-semibold text-theme-secondary flex-shrink-0">Standard SPSA:</span>
+                  <span className="text-theme-muted text-right">Noise-tolerant, but slower convergence.</span>
                 </div>
-                <div className="flex items-center justify-between p-2 rounded-lg bg-theme-highlight/50 border border-theme-accent/40">
-                  <span className="font-bold text-theme-accent">SPSA-GC (Ours):</span>
-                  <span className="font-semibold text-emerald-700 dark:text-emerald-300">Matches true-gradient SGD-NAG stability.</span>
+                <div className="flex items-center justify-between gap-2 p-2 rounded-lg bg-theme-highlight/50 border border-theme-accent/40">
+                  <span className="font-bold text-theme-accent flex-shrink-0">SPSA-GC (Ours):</span>
+                  <span className="font-semibold text-emerald-700 dark:text-emerald-300 text-right">Matches true-gradient SGD-NAG stability.</span>
                 </div>
               </div>
             </div>
