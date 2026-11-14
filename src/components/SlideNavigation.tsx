@@ -124,7 +124,7 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
 
         <button
           onClick={onToggleFullscreen}
-          className="hidden sm:flex p-2 rounded-lg text-theme-muted hover:text-theme-primary hover:bg-theme-card border border-transparent hover:border-theme-border transition-colors"
+          className="flex p-2 rounded-lg text-theme-muted hover:text-theme-primary hover:bg-theme-card border border-transparent hover:border-theme-border transition-colors touch-manipulation"
           title="Toggle Fullscreen (F)"
           aria-label="Toggle Fullscreen"
         >

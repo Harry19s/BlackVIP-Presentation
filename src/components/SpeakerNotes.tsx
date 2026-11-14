@@ -40,9 +40,9 @@ export const SpeakerNotes: React.FC<SpeakerNotesProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-y-0 right-0 w-full sm:w-[480px] z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-2xl border-l border-theme-border flex flex-col text-theme-primary transition-all duration-300">
+    <div className="w-full h-full min-h-0 min-w-0 bg-theme-bg flex flex-col text-theme-primary overflow-hidden">
       {/* Header */}
-      <div className="p-4 border-b border-theme-border flex items-center justify-between bg-slate-50/50 dark:bg-slate-800/40">
+      <div className="p-3 sm:p-4 border-b border-theme-border flex items-center justify-between bg-theme-card/60 flex-shrink-0">
         <div className="flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-theme-accent" />
           <div>

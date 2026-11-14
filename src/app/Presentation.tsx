@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight, Grid, FileText, Minimize } from 'lucide-react';
 import { useSlideNavigation } from '../hooks/useSlideNavigation';
 import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
 import { ProgressBar } from '../components/ProgressBar';
@@ -53,6 +54,39 @@ export const Presentation: React.FC = () => {
   // Fullscreen State
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  // Draggable Split State (default 70% slide / 30% notes)
+  const [splitPercent, setSplitPercent] = useState(70);
+  const [isDraggingSplit, setIsDraggingSplit] = useState(false);
+  const splitContainerRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isDraggingSplit) return;
+
+    const handlePointerMove = (e: PointerEvent) => {
+      const rect = splitContainerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const isDesktop = window.innerWidth >= 768;
+      const raw = isDesktop
+        ? ((e.clientX - rect.left) / rect.width) * 100
+        : ((e.clientY - rect.top) / rect.height) * 100;
+      const clamped = Math.min(85, Math.max(35, raw));
+      setSplitPercent(clamped);
+    };
+
+    const handlePointerUp = () => {
+      setIsDraggingSplit(false);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+    };
+  }, [isDraggingSplit]);
+
   // Touch swipe tracking for mobile navigation
   const touchStartRef = React.useRef<{ x: number; y: number } | null>(null);
 
@@ -99,18 +133,20 @@ export const Presentation: React.FC = () => {
   }, []);
 
   const toggleFullscreen = useCallback(() => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch((err) => {
-        console.error('Error attempting to enable fullscreen:', err);
-      });
+    if (!isFullscreen) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch((err) => {
+          console.error('Error attempting to enable fullscreen:', err);
+        });
+      }
       setIsFullscreen(true);
     } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-        setIsFullscreen(false);
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
       }
+      setIsFullscreen(false);
     }
-  }, []);
+  }, [isFullscreen]);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -182,37 +218,146 @@ export const Presentation: React.FC = () => {
 
   return (
     <div
-      className="w-screen h-screen supports-[height:100dvh]:h-[100dvh] flex flex-col bg-theme-bg text-theme-primary overflow-hidden relative font-sans"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      className={`w-screen h-screen supports-[height:100dvh]:h-[100dvh] flex flex-col bg-theme-bg text-theme-primary overflow-hidden relative font-sans ${
+        isDraggingSplit ? 'select-none' : ''
+      }`}
     >
       {/* Top Slide Progress Bar */}
       <ProgressBar current={currentSlide} total={totalSlides} />
 
-      {/* Main Slide Presentation Viewport */}
-      <SlideContainer
-        currentSlide={currentSlide}
-        direction={direction}
-        animationKey={animationKey}
+      {/* Main Content Area: Slide + Optional Draggable Speaker Notes Split */}
+      <div
+        ref={splitContainerRef}
+        className="flex-1 min-h-0 w-full flex flex-col md:flex-row overflow-hidden"
       >
-        {renderSlideContent()}
-      </SlideContainer>
+        {/* Main Slide Presentation Viewport (swipeable on mobile) */}
+        <div
+          className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <SlideContainer
+            currentSlide={currentSlide}
+            direction={direction}
+            animationKey={animationKey}
+          >
+            {renderSlideContent()}
+          </SlideContainer>
+        </div>
 
-      {/* Bottom Presentation Controls Bar */}
-      <SlideNavigation
-        currentSlide={currentSlide}
-        totalSlides={totalSlides}
-        onPrev={prevSlide}
-        onNext={nextSlide}
-        onToggleOverview={toggleOverview}
-        onToggleNotes={toggleNotes}
-        onReplay={replayAnimation}
-        isFullscreen={isFullscreen}
-        onToggleFullscreen={toggleFullscreen}
-        currentTheme={currentTheme}
-        onSelectTheme={setCurrentTheme}
-        isNotesOpen={isNotesOpen}
-      />
+        {/* Draggable Split Handle & Speaker Notes Section */}
+        {isNotesOpen && (
+          <>
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              tabIndex={0}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                setIsDraggingSplit(true);
+              }}
+              onDoubleClick={() => setSplitPercent(70)}
+              title="Drag to resize slide & notes (double-click to reset 70/30)"
+              className={`group flex-shrink-0 touch-none flex items-center justify-center transition-colors ${
+                isDraggingSplit ? 'bg-theme-accent/25' : 'bg-theme-border/30 hover:bg-theme-accent/20'
+              } h-3 w-full cursor-row-resize md:h-full md:w-2.5 md:cursor-col-resize z-20`}
+            >
+              <div
+                className={`rounded-full transition-colors ${
+                  isDraggingSplit ? 'bg-theme-accent' : 'bg-theme-muted/50 group-hover:bg-theme-accent'
+                } w-12 h-1 md:w-1 md:h-10`}
+              />
+            </div>
+
+            <div
+              className="flex-shrink-0 min-h-0 min-w-0 overflow-hidden"
+              style={{ flexBasis: `${100 - splitPercent}%` }}
+            >
+              <SpeakerNotes
+                currentSlide={currentSlide}
+                isOpen={isNotesOpen}
+                onClose={() => setIsNotesOpen(false)}
+              />
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Bottom Presentation Controls Bar (hidden in fullscreen) */}
+      {!isFullscreen && (
+        <SlideNavigation
+          currentSlide={currentSlide}
+          totalSlides={totalSlides}
+          onPrev={prevSlide}
+          onNext={nextSlide}
+          onToggleOverview={toggleOverview}
+          onToggleNotes={toggleNotes}
+          onReplay={replayAnimation}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
+          currentTheme={currentTheme}
+          onSelectTheme={setCurrentTheme}
+          isNotesOpen={isNotesOpen}
+        />
+      )}
+
+      {/* Fullscreen Floating Bottom Controls (mobile & quick actions) */}
+      {isFullscreen && (
+        <div className="fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-40 flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-theme-card/85 backdrop-blur-md border border-theme-border/70 shadow-xl opacity-95 sm:opacity-35 sm:hover:opacity-100 sm:focus-within:opacity-100 transition-opacity touch-manipulation">
+          <button
+            onClick={prevSlide}
+            disabled={currentSlide <= 1}
+            className="p-1.5 rounded-full text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-colors"
+            title="Previous slide"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <span className="text-xs font-mono font-semibold text-theme-secondary px-1 select-none">
+            {currentSlide}/{totalSlides}
+          </span>
+          <button
+            onClick={nextSlide}
+            disabled={currentSlide >= totalSlides}
+            className="p-1.5 rounded-full text-theme-primary hover:bg-theme-cardHover disabled:opacity-30 disabled:pointer-events-none transition-colors"
+            title="Next slide"
+            aria-label="Next slide"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+
+          <div className="w-px h-4 bg-theme-border mx-0.5" />
+
+          <button
+            onClick={toggleOverview}
+            className="p-1.5 rounded-full text-theme-muted hover:text-theme-primary hover:bg-theme-cardHover transition-colors"
+            title="Slide Overview"
+            aria-label="Slide Overview"
+          >
+            <Grid className="w-4 h-4" />
+          </button>
+          <button
+            onClick={toggleNotes}
+            className={`p-1.5 rounded-full transition-colors ${
+              isNotesOpen
+                ? 'bg-theme-highlight text-theme-accent'
+                : 'text-theme-muted hover:text-theme-primary hover:bg-theme-cardHover'
+            }`}
+            title="Speaker Notes"
+            aria-label="Speaker Notes"
+          >
+            <FileText className="w-4 h-4" />
+          </button>
+          <button
+            onClick={toggleFullscreen}
+            className="p-1.5 rounded-full text-theme-muted hover:text-theme-primary hover:bg-theme-cardHover transition-colors"
+            title="Exit Fullscreen (F / Esc)"
+            aria-label="Exit Fullscreen"
+          >
+            <Minimize className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Slide Overview Grid Modal */}
       <SlideOverview
@@ -220,13 +365,6 @@ export const Presentation: React.FC = () => {
         isOpen={isOverviewOpen}
         onSelectSlide={goToSlide}
         onClose={() => setIsOverviewOpen(false)}
-      />
-
-      {/* Speaker Notes Drawer Panel */}
-      <SpeakerNotes
-        currentSlide={currentSlide}
-        isOpen={isNotesOpen}
-        onClose={() => setIsNotesOpen(false)}
       />
     </div>
   );

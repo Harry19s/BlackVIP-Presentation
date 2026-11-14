@@ -7,6 +7,7 @@ import {
   themeSynthwaveNeon,
   themeNordicSage,
 } from './theme2';
+import { themeTerracottaInk, themeCarbonGold } from './uniqueThemes';
 
 export const darkAcademicTheme: PresentationTheme = {
   id: 'dark-academic',
@@ -44,6 +45,8 @@ export const darkAcademicTheme: PresentationTheme = {
  * - Warm Editorial Paper (Classic editorial light)
  */
 export const availableThemes: PresentationTheme[] = [
+  themeTerracottaInk,
+  themeCarbonGold,
   defaultTheme,
   theme2,
   themeCyberDaylight,
