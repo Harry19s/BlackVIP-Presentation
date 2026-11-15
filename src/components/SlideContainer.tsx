@@ -27,7 +27,7 @@ export const SlideContainer: React.FC<SlideContainerProps> = ({
             initial="enter"
             animate="center"
             exit="exit"
-            className="w-full h-full p-3 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between overflow-y-auto overflow-x-hidden overscroll-contain [&>*]:h-auto [&>*]:min-h-full md:[&>*]:h-full"
+            className="w-full h-full p-3 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between overflow-y-auto overflow-x-hidden overscroll-contain [&>*]:!h-auto [&>*]:min-h-full"
           >
             {children}
           </motion.div>

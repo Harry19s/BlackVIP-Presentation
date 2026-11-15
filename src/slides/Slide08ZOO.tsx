@@ -67,7 +67,7 @@ export const Slide08ZOO: React.FC = () => {
       {/* Mathematical Intuition & Query Complexity Breakdown */}
       <motion.div
         variants={fadeUp}
-        className="p-3.5 rounded-xl bg-theme-card border border-theme-border flex flex-col sm:flex-row items-center justify-between gap-4"
+        className="p-3.5 rounded-xl bg-theme-card border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-shrink-0"
       >
         <div className="space-y-1">
           <span className="text-xs font-bold uppercase tracking-wider text-theme-accent">

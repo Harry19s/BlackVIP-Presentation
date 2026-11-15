@@ -72,46 +72,46 @@ export const Slide06Coordinator: React.FC = () => {
           </div>
 
           {/* Node flow */}
-          <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-2 w-full my-auto py-2">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-1.5 lg:gap-2 w-full my-auto py-2">
             <DiagramNode
               label={<span className="flex items-center justify-center gap-1"><span>Input</span><Equation math="x" block={false} /></span>}
               sublabel="3 × 224 × 224"
               type="input"
-              className="w-40 md:w-24 text-[11px]"
+              className="w-44 md:w-auto md:flex-1 md:min-w-0 text-[11px]"
             />
 
-            <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" />
+            <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" className="flex-shrink-0" />
 
             <DiagramNode
               label="Frozen SSL Encoder"
               sublabel={<span className="flex items-center justify-center gap-1"><Equation math="f(\cdot)" block={false} /><span>(MAE)</span></span>}
               type="frozen"
-              className="w-44 md:w-32 text-xs"
+              className="w-44 md:w-auto md:flex-1 md:min-w-0 text-xs"
             />
 
-            <ArrowConnector label={<Equation math="z = f(x)" block={false} />} length="short" responsive="md" />
+            <ArrowConnector label={<Equation math="z = f(x)" block={false} />} length="short" responsive="md" className="flex-shrink-0" />
 
-            <div className="flex flex-col items-center p-2 rounded-lg bg-theme-highlight border border-theme-accent/40 text-center w-40 md:w-28">
+            <div className="flex flex-col items-center p-2 rounded-lg bg-theme-highlight border border-theme-accent/40 text-center w-44 md:w-auto md:flex-1 md:min-w-0">
               <span className="text-[10px] font-bold text-theme-accent uppercase">Latent Code</span>
               <Equation math="z \in \mathbb{R}^d" block={false} className="text-[11px]" />
             </div>
 
-            <ArrowConnector label={<Equation math="+ \phi_t" block={false} />} length="short" responsive="md" />
+            <ArrowConnector label={<Equation math="+ \phi_t" block={false} />} length="short" responsive="md" className="flex-shrink-0" />
 
             <DiagramNode
               label="Trainable Decoder"
               sublabel={<Equation math="g_{\phi_d}(\cdot)" block={false} />}
               type="trainable"
-              className="w-44 md:w-32 text-xs"
+              className="w-44 md:w-auto md:flex-1 md:min-w-0 text-xs"
             />
 
-            <ArrowConnector label={<Equation math="v(x)" block={false} />} length="short" responsive="md" />
+            <ArrowConnector label={<Equation math="v(x)" block={false} />} length="short" responsive="md" className="flex-shrink-0" />
 
             <DiagramNode
               label={<span className="flex items-center justify-center gap-1"><span>Visual Prompt</span><Equation math="v" block={false} /></span>}
               sublabel="Structured Canvas"
               type="output"
-              className="w-44 md:w-28 text-[11px]"
+              className="w-44 md:w-auto md:flex-1 md:min-w-0 text-[11px]"
             />
           </div>
 

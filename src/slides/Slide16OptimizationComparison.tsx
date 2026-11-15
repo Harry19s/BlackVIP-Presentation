@@ -25,12 +25,12 @@ export const Slide16OptimizationComparison: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:flex-1 md:min-h-0 items-stretch">
         {/* Left: Paper Figures */}
-        <div className="md:col-span-6 min-h-0 flex flex-col">
+        <div className="md:col-span-6 md:min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.optimizationComparison}
-            className="flex-1 min-h-0 h-full"
+            className="md:flex-1 md:min-h-0 h-auto md:h-full"
           />
         </div>
 
@@ -57,13 +57,13 @@ export const Slide16OptimizationComparison: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 text-[11px] text-theme-muted font-mono flex items-center justify-between">
+            <div className="pt-2 text-[11px] text-theme-muted font-mono flex flex-wrap items-center justify-between gap-2">
               <span>Noise Model: <Equation math="\epsilon \sim \mathcal{N}(0, \text{scale}^2)" block={false} /></span>
               <span>Dim: <Equation math="\theta \in \mathbb{R}^{100}" block={false} /></span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl border border-theme-accent bg-theme-card shadow-slide-card text-xs space-y-2 flex-1 flex flex-col justify-center">
+          <div className="p-4 rounded-xl border border-theme-accent bg-theme-card shadow-slide-card text-xs space-y-2 flex-1 flex flex-col justify-start">
             <span className="font-bold text-theme-accent flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
               <Zap className="w-4 h-4" /> Real-World API Query Efficiency (Fig. 7)
             </span>

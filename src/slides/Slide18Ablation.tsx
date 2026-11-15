@@ -24,12 +24,12 @@ export const Slide18Ablation: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:flex-1 md:min-h-0 items-stretch">
         {/* Left: Paper Ablation Tables */}
-        <div className="md:col-span-6 min-h-0 flex flex-col">
+        <div className="md:col-span-6 md:min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.ablationStudy}
-            className="flex-1 min-h-0 h-full"
+            className="md:flex-1 md:min-h-0 h-auto md:h-full"
           />
         </div>
 
@@ -51,12 +51,12 @@ export const Slide18Ablation: React.FC = () => {
           </div>
 
           {/* Table 6: Coordinator Weights x SPSA */}
-          <div className="p-4 rounded-xl border border-theme-accent bg-theme-card shadow-slide-card text-xs space-y-2 flex-1 flex flex-col justify-between">
+          <div className="p-4 rounded-xl border border-theme-accent bg-theme-card shadow-slide-card text-xs space-y-2 flex-1 flex flex-col justify-start">
             <span className="font-bold text-theme-accent flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-theme-border">
               <SlidersHorizontal className="w-4 h-4" /> Table 6: Coordinator Weights &times; Optimizer
             </span>
 
-            <div className="overflow-hidden rounded-lg border border-theme-border bg-white dark:bg-slate-900">
+            <div className="overflow-x-auto rounded-lg border border-theme-border bg-white dark:bg-slate-900 my-auto">
               <table className="w-full text-[11px] font-mono text-left">
                 <thead className="bg-theme-card text-theme-muted border-b border-theme-border">
                   <tr>

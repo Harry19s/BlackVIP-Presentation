@@ -75,58 +75,100 @@ export const Slide09SPSAConcept: React.FC = () => {
           </span>
 
           {/* Animated 2D Parameter Perturbation Visualization */}
-          <div className="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl bg-white dark:bg-slate-900 border border-theme-border p-4 flex items-center justify-center shadow-inner my-auto">
+          <div className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-2xl bg-white dark:bg-slate-900 border border-theme-border p-4 flex items-center justify-center shadow-inner my-auto">
+            {/* Geometrically aligned perturbation circle & diagonal axis */}
+            <svg viewBox="0 0 280 280" className="w-full h-full pointer-events-none">
+              <defs>
+                <linearGradient id="spsa-axis" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#f43f5e" stopOpacity="0.85" />
+                  <stop offset="50%" stopColor="var(--color-accent)" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#10b981" stopOpacity="0.85" />
+                </linearGradient>
+              </defs>
+              {/* Translucent perturbation circle */}
+              <circle
+                cx="140"
+                cy="140"
+                r="74"
+                fill="var(--color-highlight)"
+                fillOpacity="0.12"
+                stroke="currentColor"
+                strokeOpacity="0.22"
+                strokeWidth="1.5"
+                strokeDasharray="5 5"
+                className="text-theme-muted"
+              />
+              {/* Diagonal perturbation vector line passing through center (140,140) */}
+              <line
+                x1="88"
+                y1="192"
+                x2="192"
+                y2="88"
+                stroke="url(#spsa-axis)"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+            </svg>
+
             {/* Center Parameter Point */}
             <motion.div
               className="absolute w-5 h-5 rounded-full bg-theme-accent ring-4 ring-theme-highlight z-20 flex items-center justify-center"
               animate={{ scale: [1, 1.15, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <span className="absolute -bottom-6 text-xs font-bold text-theme-primary whitespace-nowrap bg-theme-card px-2 py-0.5 rounded shadow-xs border flex items-center gap-1">
+              <span className="absolute -bottom-7 text-xs font-bold text-theme-primary whitespace-nowrap bg-theme-card px-2 py-0.5 rounded shadow-xs border border-theme-border flex items-center gap-1">
                 <Equation math="\phi_i" block={false} />
                 <span className="text-[10px] font-sans text-theme-muted font-normal">(Current)</span>
               </span>
             </motion.div>
 
-            {/* Positive Perturbation Vector */}
+            {/* Green Dot on top-right circle perimeter (192, 88 in 280x280 -> ~68.6%, 31.4%) */}
             <motion.div
-              className="absolute top-4 right-4 flex flex-col items-center bg-emerald-500/10 border border-emerald-500/30 p-2 rounded-xl backdrop-blur-xs shadow-xs"
-              initial={{ opacity: 0, x: -20, y: 20 }}
+              className="absolute w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500 ring-4 ring-emerald-500/25 z-20"
+              style={{ left: '68.6%', top: '31.4%' }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.25, duration: 0.35 }}
+            />
+
+            {/* Positive Perturbation Label Box (outside the circle, top-right) */}
+            <motion.div
+              className="absolute top-2.5 right-2.5 flex flex-col items-center bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1.5 rounded-xl backdrop-blur-xs shadow-xs"
+              initial={{ opacity: 0, x: -10, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
             >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-emerald-200" />
-                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
-                  <Equation math="\phi_i^+ \to \mathcal{L}^+" block={false} />
-                </span>
-              </div>
-              <div className="text-[11px] text-emerald-700 dark:text-emerald-300 font-mono font-medium">
+              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 whitespace-nowrap">
+                <Equation math="\phi_i^+ \to \mathcal{L}^+" block={false} />
+              </span>
+              <span className="text-[11px] text-emerald-700 dark:text-emerald-300 font-mono font-medium">
                 <Equation math="+ c_i \Delta_i" block={false} />
-              </div>
+              </span>
             </motion.div>
 
-            {/* Negative Perturbation Vector */}
+            {/* Red Dot on bottom-left circle perimeter (88, 192 in 280x280 -> ~31.4%, 68.6%) */}
             <motion.div
-              className="absolute bottom-4 left-4 flex flex-col items-center bg-rose-500/10 border border-rose-500/30 p-2 rounded-xl backdrop-blur-xs shadow-xs"
-              initial={{ opacity: 0, x: 20, y: -20 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-            >
-              <div className="flex items-center gap-1.5 mb-0.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-rose-500 ring-2 ring-rose-200" />
-                <span className="text-xs font-bold text-rose-600 dark:text-rose-400 whitespace-nowrap">
-                  <Equation math="\phi_i^- \to \mathcal{L}^-" block={false} />
-                </span>
-              </div>
-              <div className="text-[11px] text-rose-700 dark:text-rose-300 font-mono font-medium">
-                <Equation math="- c_i \Delta_i" block={false} />
-              </div>
-            </motion.div>
+              className="absolute w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-rose-500 ring-4 ring-rose-500/25 z-20"
+              style={{ left: '31.4%', top: '68.6%' }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.45, duration: 0.35 }}
+            />
 
-            {/* Connecting Dashed Axis */}
-            <div className="absolute inset-8 border border-dashed border-slate-300 dark:border-slate-700 rounded-full opacity-40 pointer-events-none" />
-            <div className="w-full h-0.5 bg-gradient-to-r from-rose-400 via-theme-accent to-emerald-400 transform rotate-45 opacity-60" />
+            {/* Negative Perturbation Label Box (outside the circle, bottom-left) */}
+            <motion.div
+              className="absolute bottom-2.5 left-2.5 flex flex-col items-center bg-rose-500/10 border border-rose-500/30 px-2.5 py-1.5 rounded-xl backdrop-blur-xs shadow-xs"
+              initial={{ opacity: 0, x: 10, y: -10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.4 }}
+            >
+              <span className="text-xs font-bold text-rose-600 dark:text-rose-400 whitespace-nowrap">
+                <Equation math="\phi_i^- \to \mathcal{L}^-" block={false} />
+              </span>
+              <span className="text-[11px] text-rose-700 dark:text-rose-300 font-mono font-medium">
+                <Equation math="- c_i \Delta_i" block={false} />
+              </span>
+            </motion.div>
           </div>
 
           <div className="mt-2 flex items-center justify-around w-full text-xs font-mono pt-2 border-t border-theme-border/60">

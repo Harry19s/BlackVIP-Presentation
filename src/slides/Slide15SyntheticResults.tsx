@@ -25,12 +25,12 @@ export const Slide15SyntheticResults: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:flex-1 md:min-h-0 items-stretch">
         {/* Left: Paper Figure */}
-        <div className="md:col-span-6 min-h-0 flex flex-col">
+        <div className="md:col-span-6 md:min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.syntheticResults}
-            className="flex-1 min-h-0 h-full"
+            className="md:flex-1 md:min-h-0 h-auto md:h-full"
           />
         </div>
 
@@ -50,12 +50,12 @@ export const Slide15SyntheticResults: React.FC = () => {
             </ul>
           </div>
 
-          <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/20 text-xs space-y-2.5 flex-1 flex flex-col justify-between">
+          <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900 bg-emerald-50/50 dark:bg-emerald-950/20 text-xs space-y-2.5 flex-1 flex flex-col justify-start">
             <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5 uppercase tracking-wider pb-1 border-b border-emerald-200 dark:border-emerald-800">
               <CheckCircle2 className="w-4 h-4" /> Table 2: 16-Shot Accuracy (%)
             </span>
 
-            <div className="overflow-hidden rounded-lg border border-theme-border bg-white dark:bg-slate-900">
+            <div className="overflow-x-auto rounded-lg border border-theme-border bg-white dark:bg-slate-900 my-auto">
               <table className="w-full text-[11px] font-mono text-left">
                 <thead className="bg-theme-card text-theme-muted border-b border-theme-border">
                   <tr>

@@ -78,7 +78,7 @@ export const Slide02Motivation: React.FC = () => {
       {/* Real-World Dilemma & Industry Context Footer */}
       <motion.div
         variants={fadeUp}
-        className="p-3.5 rounded-xl bg-theme-card border border-theme-border flex flex-col sm:flex-row items-center justify-between gap-4"
+        className="p-3.5 rounded-xl bg-theme-card border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-shrink-0"
       >
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex-shrink-0">

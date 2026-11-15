@@ -84,7 +84,7 @@ export const Slide14ExperimentalSetup: React.FC = () => {
       </motion.div>
 
       {/* Implementation Details Banner */}
-      <motion.div variants={fadeUp} className="p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs text-theme-secondary flex flex-col sm:flex-row items-center justify-between gap-3">
+      <motion.div variants={fadeUp} className="p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs text-theme-secondary flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-shrink-0">
         <div className="flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4 text-theme-accent flex-shrink-0" />
           <span>

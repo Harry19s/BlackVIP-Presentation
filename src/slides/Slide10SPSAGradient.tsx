@@ -97,7 +97,7 @@ export const Slide10SPSAGradient: React.FC = () => {
                 <Equation math="\Delta \mathcal{L} = 0.85 - 0.75 = 0.10" block={false} />
               </div>
 
-              <div className="p-2.5 rounded-xl bg-theme-highlight border border-theme-accent/30 flex items-center justify-between font-bold text-theme-accent">
+              <div className="p-2.5 rounded-xl bg-theme-highlight border border-theme-accent/30 flex flex-wrap items-center justify-between gap-2 font-bold text-theme-accent">
                 <span>5. Estimated Gradient:</span>
                 <Equation math="\hat{g}_i = \frac{0.10}{0.2} \times [+1, -1]^T = [+0.5, -0.5]^T" block={false} />
               </div>

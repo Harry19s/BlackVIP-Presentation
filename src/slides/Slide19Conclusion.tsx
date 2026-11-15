@@ -44,41 +44,41 @@ export const Slide19Conclusion: React.FC = () => {
         </span>
 
         {/* Simplified clean flow */}
-        <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center gap-2 sm:gap-3 w-full my-auto py-2">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-2 sm:gap-3 w-full my-auto py-2">
           <DiagramNode
             label={<span className="flex items-center justify-center gap-1"><span>Input</span><Equation math="x" block={false} /></span>}
             sublabel="Target Domain"
             type="input"
             icon={<ImgIcon className="w-4 h-4 text-gray-500" />}
-            className="w-44 md:w-32 text-xs"
+            className="w-44 md:w-auto md:flex-1 md:min-w-0 md:max-w-[12rem] text-xs"
           />
 
-          <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" />
+          <ArrowConnector label={<Equation math="x" block={false} />} length="short" responsive="md" className="flex-shrink-0" />
 
           <DiagramNode
             label="Coordinator"
             sublabel="Prompt Reparameterizer"
             type="trainable"
-            className="w-44 md:w-36 text-xs"
+            className="w-44 md:w-auto md:flex-1 md:min-w-0 md:max-w-[13rem] text-xs"
           />
 
-          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" responsive="md" />
+          <ArrowConnector label={<Equation math="v(x; \phi)" block={false} />} length="medium" responsive="md" className="flex-shrink-0" />
 
           <DiagramNode
             label={<span className="flex items-center justify-center gap-1"><span>Visual Prompt</span><Equation math="v" block={false} /></span>}
             sublabel={<Equation math="v(x; \phi)" block={false} />}
             type="output"
-            className="w-44 md:w-36 text-xs"
+            className="w-44 md:w-auto md:flex-1 md:min-w-0 md:max-w-[13rem] text-xs"
           />
 
-          <ArrowConnector label="Forward" length="short" responsive="md" />
+          <ArrowConnector label="Forward" length="short" responsive="md" className="flex-shrink-0" />
 
           <DiagramNode
             label="Frozen Vision Model"
             sublabel="Target Foundation Backbone"
             type="frozen"
             icon={<Cpu className="w-4 h-4 text-slate-500" />}
-            className="w-44 md:w-40 text-xs"
+            className="w-44 md:w-auto md:flex-1 md:min-w-0 md:max-w-[14rem] text-xs"
           />
         </div>
 

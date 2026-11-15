@@ -33,9 +33,9 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   const hasContent = Boolean((items && items.length > 0) || displaySrc);
 
   return (
-    <div className={`flex flex-col min-h-0 border border-theme-border rounded-xl bg-theme-card overflow-hidden shadow-slide-card ${className}`}>
+    <div className={`flex flex-col md:min-h-0 border border-theme-border rounded-xl bg-theme-card overflow-hidden shadow-slide-card ${className}`}>
       {items && items.length > 1 && layout === 'tabs' && (
-        <div className="flex-shrink-0 flex items-center justify-between gap-2 px-3 py-1.5 border-b border-theme-border/60 bg-theme-bg/60">
+        <div className="flex-shrink-0 flex flex-wrap items-center justify-between gap-1.5 px-3 py-1.5 border-b border-theme-border/60 bg-theme-bg/60">
           <span className="text-[11px] font-semibold text-theme-muted truncate">{displaySource}</span>
           <div className="flex items-center gap-1 flex-shrink-0">
             {items.map((item, idx) => (
@@ -57,7 +57,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       )}
 
       <div
-        className={`w-full flex-1 min-h-0 relative flex items-center justify-center border-b border-theme-border/60 overflow-hidden ${
+        className={`w-full md:flex-1 md:min-h-0 relative flex items-center justify-center border-b border-theme-border/60 md:overflow-hidden ${
           hasContent ? 'bg-white p-2 sm:p-2.5' : 'bg-slate-900/5 dark:bg-slate-950/40'
         }`}
         style={!hasContent ? { aspectRatio: displayAspect } : undefined}
@@ -67,19 +67,19 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
             <img
               src={items[activeTab]?.src || items[0].src}
               alt={items[activeTab]?.label || displayTitle}
-              className="max-w-full max-h-[42vh] md:max-h-full w-auto h-auto object-contain"
+              className="w-full md:w-auto max-w-full max-h-[45vh] md:max-h-[44vh] h-auto object-contain"
             />
           ) : (
-            <div className="w-full h-full min-h-0 flex flex-col items-center justify-center gap-2">
+            <div className="w-full md:h-full md:min-h-0 flex flex-col items-center justify-center gap-2">
               {items.map((item) => (
                 <div
                   key={item.label}
-                  className="w-full flex-1 min-h-0 flex items-center justify-center overflow-hidden"
+                  className="w-full md:flex-1 md:min-h-0 flex items-center justify-center md:overflow-hidden"
                 >
                   <img
                     src={item.src}
                     alt={item.label}
-                    className="max-w-full max-h-[26vh] md:max-h-full w-auto h-auto object-contain"
+                    className="w-full md:w-auto max-w-full max-h-[32vh] md:max-h-[21vh] h-auto object-contain"
                   />
                 </div>
               ))}
@@ -89,7 +89,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
           <img
             src={displaySrc}
             alt={displayTitle}
-            className="max-w-full max-h-[42vh] md:max-h-full w-auto h-auto object-contain"
+            className="w-full md:w-auto max-w-full max-h-[45vh] md:max-h-[44vh] h-auto object-contain"
           />
         ) : (
           <div className="flex flex-col items-center justify-center p-6 text-center">

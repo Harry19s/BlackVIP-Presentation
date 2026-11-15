@@ -24,12 +24,12 @@ export const Slide17Robustness: React.FC = () => {
         </motion.p>
       </div>
 
-      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 flex-1 min-h-0 items-stretch">
+      <motion.div variants={scaleIn} className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:flex-1 md:min-h-0 items-stretch">
         {/* Left: Paper Figure */}
-        <div className="md:col-span-6 min-h-0 flex flex-col">
+        <div className="md:col-span-6 md:min-h-0 flex flex-col">
           <ImagePlaceholder
             figure={paperFigures.robustnessShift}
-            className="flex-1 min-h-0 h-full"
+            className="md:flex-1 md:min-h-0 h-auto md:h-full"
           />
         </div>
 
@@ -41,7 +41,7 @@ export const Slide17Robustness: React.FC = () => {
               <Sparkles className="w-4 h-4" /> Table 3: 14-Dataset Average (16-Shot)
             </span>
 
-            <div className="grid grid-cols-4 gap-2 text-center font-mono">
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-2 text-center font-mono my-auto">
               <div className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-theme-border">
                 <div className="text-[10px] text-theme-muted">ZS</div>
                 <div className="text-sm font-bold text-theme-secondary">57.6%</div>

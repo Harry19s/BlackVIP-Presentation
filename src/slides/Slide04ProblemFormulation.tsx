@@ -117,7 +117,7 @@ export const Slide04ProblemFormulation: React.FC = () => {
       {/* The Core Challenge Banner */}
       <motion.div
         variants={fadeUp}
-        className="p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs text-theme-secondary flex flex-col sm:flex-row items-center justify-between gap-3"
+        className="p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs text-theme-secondary flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 flex-shrink-0"
       >
         <div className="flex items-center gap-2">
           <ShieldAlert className="w-5 h-5 text-amber-500 flex-shrink-0" />
