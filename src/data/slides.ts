@@ -140,5 +140,12 @@ export const slidesMeta: SlideMeta[] = [
     section: "Conclusion",
     part: "Part 6",
   },
+  {
+    id: 20,
+    title: "Thank You & Q&A",
+    subtitle: "Questions, Discussion & Presenter Team",
+    section: "Closing",
+    part: "Closing",
+  },
 ];
 

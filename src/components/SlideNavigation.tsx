@@ -7,6 +7,7 @@ import {
   RotateCcw,
   Maximize,
   Minimize,
+  BookOpen,
 } from 'lucide-react';
 import { SlideCounter } from './SlideCounter';
 import { ThemeDropdown } from './ThemeDropdown';
@@ -115,6 +116,18 @@ export const SlideNavigation: React.FC<SlideNavigationProps> = ({
           <FileText className="w-4 h-4" />
           <span className="hidden sm:inline text-[11px] font-mono">Notes</span>
         </button>
+
+        <a
+          href="https://arxiv.org/pdf/2303.14773"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-lg text-theme-muted hover:text-theme-primary hover:bg-theme-card border border-transparent hover:border-theme-border transition-colors flex items-center gap-1 text-xs touch-manipulation"
+          title="View Original Paper PDF (arXiv:2303.14773)"
+          aria-label="View Original Paper PDF"
+        >
+          <BookOpen className="w-4 h-4" />
+          <span className="hidden sm:inline text-[11px] font-mono">Paper</span>
+        </a>
 
         {/* Theme Dropdown */}
         <ThemeDropdown

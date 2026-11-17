@@ -30,6 +30,7 @@ import { Slide16OptimizationComparison } from '../slides/Slide16OptimizationComp
 import { Slide17Robustness } from '../slides/Slide17Robustness';
 import { Slide18Ablation } from '../slides/Slide18Ablation';
 import { Slide19Conclusion } from '../slides/Slide19Conclusion';
+import { Slide20ThankYou } from '../slides/Slide20ThankYou';
 
 export const Presentation: React.FC = () => {
   const {
@@ -211,6 +212,8 @@ export const Presentation: React.FC = () => {
         return <Slide18Ablation />;
       case 19:
         return <Slide19Conclusion />;
+      case 20:
+        return <Slide20ThankYou />;
       default:
         return <Slide01Title />;
     }

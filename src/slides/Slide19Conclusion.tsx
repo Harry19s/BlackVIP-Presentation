@@ -4,19 +4,9 @@ import { SectionLabel } from '../components/SectionLabel';
 import { DiagramNode, ArrowConnector } from '../components/Diagram';
 import { Equation } from '../components/Equation';
 import { staggerContainer, fadeUp, scaleIn } from '../utils/animations';
-import { Award, CheckCircle2, HelpCircle, Sparkles, Image as ImgIcon, Cpu, Zap, ShieldCheck } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { Award, CheckCircle2, Sparkles, Image as ImgIcon, Cpu } from 'lucide-react';
 
 export const Slide19Conclusion: React.FC = () => {
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 90,
-      spread: 75,
-      origin: { y: 0.65 },
-      colors: ['#2563EB', '#06B6D4', '#0D9488', '#38BDF8', '#818CF8'],
-    });
-  };
-
   return (
     <motion.div
       variants={staggerContainer}
@@ -116,32 +106,18 @@ export const Slide19Conclusion: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Thank you & Questions Footer */}
+      {/* Footer Takeaway */}
       <motion.div
         variants={fadeUp}
-        className="p-4 rounded-xl bg-gradient-to-r from-theme-card via-theme-highlight/40 to-theme-card border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0"
+        className="text-xs text-theme-secondary bg-theme-card/80 p-3 rounded-xl border border-theme-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 flex-shrink-0"
       >
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-theme-accent text-white dark:text-slate-950">
-            <HelpCircle className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="text-sm font-bold text-theme-primary">
-              Thank You for Your Attention!
-            </h3>
-            <p className="text-xs text-theme-secondary">
-              Open for Questions, Technical Discussion & In-Depth Walkthroughs.
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={triggerConfetti}
-          className="px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider bg-theme-accent text-white dark:text-slate-950 hover:bg-blue-600 transition-all shadow-md hover:shadow-lg flex items-center gap-2"
-        >
-          <Sparkles className="w-4 h-4" />
-          <span>Celebrate Presentation</span>
-        </button>
+        <span>
+          <strong className="text-theme-primary">Core Impact: </strong>
+          BlackVIP enables private, memory-efficient adaptation of closed-weight foundation models with only 9K learnable parameters.
+        </span>
+        <span className="text-[11px] font-mono text-theme-accent font-semibold whitespace-nowrap ml-0 sm:ml-4 self-end sm:self-auto">
+          CVPR 2023 · BlackVIP
+        </span>
       </motion.div>
     </motion.div>
   );

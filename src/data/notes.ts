@@ -205,7 +205,17 @@ export const speakerNotes: Record<number, SpeakerNote> = {
     diagramWalkthrough: "The final summary diagram encapsulates the complete story: Input Image -> Coordinator -> Visual Prompt -> Frozen Target Model, guided by SPSA-GC look-ahead optimization.",
     keyTerminology: ["BlackVIP", "Coordinator", "SPSA-GC", "Zero-Access Transfer Learning"],
     whyItMatters: "As proprietary foundation models become the standard, black-box visual prompting will be a vital tool for private, efficient, and robust AI adaptation.",
-    transitionPrompt: "Thank you for your time and attention. I would be happy to take any questions.",
+    transitionPrompt: "Let's wrap up with a quick thank you and open the floor for questions.",
+  },
+  20: {
+    slideId: 20,
+    durationEstimate: "30s",
+    objective: "Thank the audience and invite questions from the class and instructors.",
+    simpleExplanation: "Thank you for your attention. We would be glad to answer any questions on BlackVIP's architecture, SPSA-GC optimization, or experimental results.",
+    diagramWalkthrough: "Point to the presenter credits for Part-specific follow-up questions.",
+    keyTerminology: ["Q&A", "BlackVIP", "IIIT Bangalore"],
+    whyItMatters: "Opens interactive technical discussion on black-box foundation model adaptation.",
+    transitionPrompt: "Thank you — any questions?",
   },
 };
 
