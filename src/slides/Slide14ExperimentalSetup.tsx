@@ -23,8 +23,8 @@ export const Slide14ExperimentalSetup: React.FC = () => {
         </motion.p>
       </div>
 
-      {/* 4 Compact Overview Cards */}
-      <motion.div variants={scaleIn} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1 items-stretch">
+      {/* 4 Compact Overview Cards (2x2 Grid) */}
+      <motion.div variants={scaleIn} className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 items-stretch">
         <ComparisonCard
           title="Datasets"
           badge="14 + 2 Tasks"
